@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"cSpell.ignoreWords": [
+			"IAAC",
+			"RABBITMQ",
+			"Vprofile"
+		]
+	}
+}
