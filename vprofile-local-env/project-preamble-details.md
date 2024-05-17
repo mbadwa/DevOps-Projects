@@ -16,7 +16,7 @@ There are a number of services/components that powers the vprofile Java web app.
   
 ### Project setup
 
-- [Scenario]()
+- **Scenario**
   - Problem 
     - You have a requirement to make changes to prod environment but you lack confidence to make those changes live and you want to create your own sandbox.
     - Local setup is complex.
@@ -25,20 +25,20 @@ There are a number of services/components that powers the vprofile Java web app.
     - Have an automated local setup.
     - Use IAAC so it's repeatable.
   
-- [Tools]()
+- **Tools**
   - Local env setup
     - Hypervisor - Oracle VM VirtualBox
     - Automation - Vagrant
     - CLI - bash in Linux
     - IDE - Visual Studio Code or your preference
  
-- [The Architecture of Project Services]()
+- **The Architecture of Project Services**
   - NGINX
   - TOMCAT
   - RABBITMQ
   - MEMCACHED
   - MYSQL
-- [The Architecture of the Automated Setup]()
+- **The Architecture of the Automated Setup**
   - Vagrant
   - VirtualBox
   - Bash
