@@ -98,3 +98,14 @@ Verify in the browser by getting the IP address of "web01" server. To log into t
 username - "*admin_vp*" and pass - "*admin_vp*" without the quotes, check other services like RabbitMQ, Memcached, etc. 
 
 ## 2. Automatic Provisioning
+
+Open either /DevOps-Projects/vprofile-project-local /vagrant/Manual_provisioning_WinMacIntel or the MacOSM1 folder depending on your OS.
+
+1. The Vagrantfile in it, is slightly different, it points to scripts for each service, e.g. "mysql.sh", memcache.sh", etc.
+2. *cd* into /DevOps-Projects/vprofile-project-local /vagrant/Manual_provisioning_WinMacIntel
+3. Then just run *vagrant up* command.
+4. After all all the servers are up. SSH into the "web01" and get the IP of the server and then verify in the browser.
+5. Verify in the browser by getting the IP address of "web01" server. 
+   To log into the app use:
+
+username - "*admin_vp*" and pass - "*admin_vp*" without the quotes, check other services like RabbitMQ, Memcached, etc. 
