@@ -116,7 +116,7 @@ username - "*admin_vp*" and pass - "*admin_vp*" without the quotes, check other 
 
 Once logged in, you can click on a user and check if memcache cached the user and also check RabbitMQ if it queued any requests. If you managed to see the web app, it means Nginx was deployed successfully, if you logged in with the credentials above, it means your request was authenticated successfully against MyQSL, congratulations! You just deployed the app on prem.
 
-# Sources & References
+## Sources & References
 - [DevOps Beginners to Advanced with Projects](https://www.udemy.com/course/decodingdevops/?couponCode=LEADERSALE24A) by Imran Teli
 - [Vagrant crash course](https://gist.github.com/yeukhon/b35d94f4aa859a5477e4) by Yeuk Hon Wong
 - [DevOps Notes](https://visualpath.in/devopstutorials/devops) by Imran Teli
