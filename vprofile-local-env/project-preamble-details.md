@@ -93,7 +93,7 @@ For step by step commands reference for each vagrant box, refer to /DevOps-Proje
 Note: Additionally, regarding "db01" vagrant box setup, when configuring Mariadb database refer to [How to Install and Secure MariaDB in RHEL 9
 ](https://jumpcloud.com/blog/how-to-install-mariadb-rhel-9). Just in case the PDF above is not as clear enough to you.
 
-Verify in the browser by getting the IP address of "web01" server. To log into the app use:
+Verify in the browser by getting the IP address of "web01" server. To log into the app, use:
 
 username - "*admin_vp*" and pass - "*admin_vp*" without the quotes, check other services like RabbitMQ, Memcached, etc. 
 
@@ -106,6 +106,8 @@ Open either /DevOps-Projects/vprofile-project-local /vagrant/Manual_provisioning
 3. Then just run *vagrant up* command.
 4. After all all the servers are up. SSH into the "web01" and get the IP of the server and then verify in the browser.
 5. Verify in the browser by getting the IP address of "web01" server. 
-   To log into the app use:
+   To log into the app, use:
 
 username - "*admin_vp*" and pass - "*admin_vp*" without the quotes, check other services like RabbitMQ, Memcached, etc. 
+
+Once logged in, you can click on a user and check if memcache cached the user and also check RabbitMQ if it queued any requests. If you managed to see the web app, it means Nginx was deployed successfully, if you log in with the credentials above, it means your request was authenticated successfully against MyQSL, congratulations! You just deployed the app on prem.
