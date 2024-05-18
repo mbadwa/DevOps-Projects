@@ -71,6 +71,8 @@ There are a number of services/components that powers the vprofile Java web app.
 
 ### Vagrant Application Stack Provisioning
 
+Before you start, make sure that you have installed VirtualBox and Vagrant on your local environment by following the instructions [here](https://www.instructables.com/How-to-Setup-and-Use-a-Vagrant-Box/).
+
 ### Services
 
 1. Nginx => Web Server
@@ -96,6 +98,8 @@ Note: Additionally, regarding "db01" vagrant box setup, when configuring Mariadb
 Verify in the browser by getting the IP address of "web01" server. To log into the app, use:
 
 username - "*admin_vp*" and pass - "*admin_vp*" without the quotes, check other services like RabbitMQ, Memcached, etc. 
+
+Once logged in, you can click on a user and check if memcache cached the user and also check RabbitMQ if it queued any requests. If you managed to see the web app, it means Nginx was deployed successfully, if you log in with the credentials above, it means your request was authenticated successfully against MyQSL, congratulations! You just deployed the app on prem.
 
 ## 2. Automatic Provisioning
 
