@@ -122,4 +122,5 @@ Once logged in, you can click on a user and check if memcache cached the user an
 - [DevOps Notes](https://visualpath.in/devopstutorials/devops) by Imran Teli
 - [Vagrant on Windows, MacOS, or Ubuntu](https://www.itu.dk/people/ropf/blog/vagrant_install.html) by Helge Pfeiffer
 - [Architecture Diagramming](https://www.drawio.com/) courtesy of draw.io application
+- [How to Install and Secure MariaDB in RHEL 9](https://jumpcloud.com/blog/how-to-install-mariadb-rhel-9) by David Worthington
   
