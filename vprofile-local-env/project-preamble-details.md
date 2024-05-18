@@ -118,6 +118,7 @@ Once logged in, you can click on a user and check if memcache cached the user an
 
 ## Sources & References
 - [DevOps Beginners to Advanced with Projects](https://www.udemy.com/course/decodingdevops/?couponCode=LEADERSALE24A) by Imran Teli
+- [Vprofile Source Code](https://github.com/hkhcoder/vprofile-project) by Imran Teli (hkhcoder)
 - [Vagrant crash course](https://gist.github.com/yeukhon/b35d94f4aa859a5477e4) by Yeuk Hon Wong
 - [DevOps Notes](https://visualpath.in/devopstutorials/devops) by Imran Teli
 - [Vagrant on Windows, MacOS, or Ubuntu](https://www.itu.dk/people/ropf/blog/vagrant_install.html) by Helge Pfeiffer
