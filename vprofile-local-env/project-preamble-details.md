@@ -71,7 +71,7 @@ There are a number of services/components that powers the vprofile Java web app.
 
 ### Vagrant Application Stack Provisioning
 
-Before you start, make sure that you have installed VirtualBox and Vagrant on your local environment by following the instructions [here](https://www.itu.dk/people/ropf/blog/vagrant_install.html). If you are new to Vagrant then use this [Vagrant crash course](https://gist.github.com/yeukhon/b35d94f4aa859a5477e4)
+Before you start, make sure that you have installed VirtualBox and Vagrant on your local environment by following the instructions [here](https://www.itu.dk/people/ropf/blog/vagrant_install.html). If you are new to Vagrant then use this [Vagrant crash course](https://gist.github.com/yeukhon/b35d94f4aa859a5477e4). There are installation and setup instructions included.
 
 ### Services
 
