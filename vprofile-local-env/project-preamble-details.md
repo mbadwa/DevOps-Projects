@@ -18,15 +18,15 @@ There are a number of services/components that powers the vprofile Java web app.
 
 - **Scenario**
   - Problem 
-    - You have a requirement to make changes to prod environment but you lack confidence to make those changes live and you want to create your own sandbox.
+    - You have a requirement to make changes to production environment but you lack confidence to make those changes live and you want to create your own sandbox.
     - Local setup is complex.
     - Time consuming and not repeatable.
   - Solution
     - Have an automated local setup.
-    - Use IAAC so it's repeatable.
+    - Use IAC so it's repeatable.
   
 - **Tools**
-  - Local env setup
+  - Local environment setup
     - Hypervisor - Oracle VM VirtualBox
     - Automation - Vagrant
     - CLI - bash in Linux
@@ -49,15 +49,15 @@ There are a number of services/components that powers the vprofile Java web app.
 - User opens a browser and enter the IP of a load balancer that routes the request to Tomcat server.
 - Apache Tomcat is a Java web application service that hosts apps written in Java.
 - If there is need for a shared storage or centralized storage the we will use NFS.
-- The user login details will be stored in MySQL database service. A user attempts to login, the Tomcat app will run an SQL query to access user info stored in MySQL database server passing through a Memcache Database service.
+- The user login details will be stored in MySQL database service. A user attempts to login, the Tomcat app will run an SQL query to access user info stored in MySQL database server the return traffic gets cached by the Memcache Database service.
 - The user query will be sent back to Tomcat and then cached in Memcached so that the use gets validated using the caching service instead.
-- RabbitMQ is a message broker/queuing agent service that streams data between to services(it's a dummy service in our env).
+- RabbitMQ is a message broker/queuing agent service that streams data between to services.
 
 ### Flow of Execution
 
 1. Set up tools mentioned above
 2. Clone source code [here](https://github.com/hkhcoder/vprofile-project.git)
-3. cd into the vagrant directory
+3. *cd* into the vagrant directory
 4. Bring up the VMs
 5. Validate all VMs
 6. Set up All the services
@@ -66,14 +66,14 @@ There are a number of services/components that powers the vprofile Java web app.
      - Rabbit MQ
      - Tomcat
      - Nginx
-     - App Build and Deploy
+     - App Build and Deploy in Tomcat Server
 7. Verify from browser
 
 ### Vagrant Application Stack Provisioning
 
 ### Services
 
-1. Nginx => Load Balancer Web Service
+1. Nginx => Web Server
 2. Tomcat => Application Server
 3. RabbitMQ => Broker/Queuing Agent
 4. Memcache => DB Caching
