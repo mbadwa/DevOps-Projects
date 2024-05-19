@@ -22,5 +22,5 @@ sql dump file:
 - db_backup.sql file is a mysql dump file.we have to import this dump to mysql db server
 - > mysql -u <user_name> -p accounts < db_backup.sql
 
-For detailed setup instructions of each vagrant box, please refer to "project-preamble-details.md" document.
+For detailed setup instructions of each vagrant box, please refer to [Project Deployment](../vprofile-local-env/project-deploy-details.md) document.
 

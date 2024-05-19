@@ -90,7 +90,7 @@ Setup should be done in this order.
 4. Tomcat (Application SVC)
 5. Nginx (Web SVC)
 
-For step by step commands reference for each vagrant box, refer to /DevOps-Projects/vprofile-project-local/VprofileProjectSetupWindowsAndMacIntel.pdf
+For step by step commands reference for each vagrant box [refer to](./vagrant/Manual_provisioning_WinMacIntel/VprofileProjectSetupWindowsAndMacIntel.pdf)
 
 Note: Additionally, regarding "db01" vagrant box setup, when configuring Mariadb database refer to [How to Install and Secure MariaDB in RHEL 9
 ](https://jumpcloud.com/blog/how-to-install-mariadb-rhel-9). Just in case the PDF above is not as clear enough to you.
