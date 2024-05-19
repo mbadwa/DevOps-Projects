@@ -2,4 +2,4 @@
 
 ### Projects
 
-1. Vprofile Application - a Java app, details on how to deploy it can be found in [Project Deployment](../DevOps-Projects/vprofile-local-env/project-deploy-details.md)
+1. Vprofile Application - a Java app, details on how to deploy it can be found in [Project Deployment](/vprofile-local-env/project-deploy-details.md)
