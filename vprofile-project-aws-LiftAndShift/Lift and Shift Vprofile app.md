@@ -159,6 +159,8 @@ To retrieve any instance user data in order to verify the scripts, you can paste
 
 ### Backend services mapping using Route 53 (Private DNS Setup)
 
+To join your DNS hosting service with AWS and create an SSL certificate using ACM, go [here](/vprofile-project-aws-LiftAndShift/Creating%20an%20SSL%20Certificate%20in%20AWS.md).
+
 1. Go to *Route 53* > *Create hosted zone*
 2. *Type*, select *Private hosted zone*
 3. VPCs to associate with the hosted zone 
