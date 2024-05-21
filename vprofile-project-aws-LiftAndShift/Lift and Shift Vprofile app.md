@@ -46,6 +46,10 @@ Managing all this on prem will need several teams; Virtualization team, Data Cen
 - No upfront costs
 - Modernized effectively
 - IAC for automation
+- 
+## Vprofile Project Application Stack Diagram
+
+![alt](/vprofile-project-aws-LiftAndShift/project-diagram.png)
 
 ## The AWS Architecture Design for the Project
 
