@@ -22,7 +22,7 @@ It's a multi tier web application stack called Vprofile, it will be hosted and r
 
 We have application services running on physical or virtual machines with various services that powers the application and the workload is in a local data center.
 
-Managing all this on prem will need several teams; Virtualization team, Data Center OPs Team, Monitoring Team, Sys Admin, etc, involved.
+Managing all this on prem will need several teams; Virtualization team, Data Center OPs Team, Monitoring Team, Sys Admin, Security team, etc, involved.
 
  - **Problem**
   
