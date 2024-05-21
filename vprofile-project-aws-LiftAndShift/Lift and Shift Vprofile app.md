@@ -6,6 +6,18 @@ This project is called Lift and Shift Application Workload, this is simply movin
 
 It's a multi tier web application stack called Vprofile, it will be hosted and run in AWS using Lift and Shift Strategy.
 
+## Objectives
+
+- We want a flexible infrastructure
+- No upfront costs
+- Modernized effectively
+- IAC for automation
+
+## Vprofile Project Application Stack Diagram
+
+![alt](/vprofile-project-aws-LiftAndShift/project-diagram.png)
+
+
 ## Scenario
 
 We have application services running on physical or virtual machines with various services that powers the application and the workload is in a local data center.
@@ -13,7 +25,7 @@ We have application services running on physical or virtual machines with variou
 Managing all this on prem will need several teams; Virtualization team, Data Center OPs Team, Monitoring Team, Sys Admin, etc, involved.
 
  - **Problem**
- - 
+  
    - Complex management
    - Scale UP/Down complexity
    - UpFront CapEx & Regular OPEx
@@ -39,17 +51,6 @@ Managing all this on prem will need several teams; Virtualization team, Data Cen
 - S3/EFS Storage for shared storage
 - Route 53 for private/public DNS service
 - IAM, Amazon Certificate Manager, EBS, etc.
-
-## Objectives
-
-- We want a flexible infrastructure
-- No upfront costs
-- Modernized effectively
-- IAC for automation
-- 
-## Vprofile Project Application Stack Diagram
-
-![alt](/vprofile-project-aws-LiftAndShift/project-diagram.png)
 
 ## The AWS Architecture Design for the Project
 
