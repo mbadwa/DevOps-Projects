@@ -1,0 +1,5 @@
+/home/mbadwa/DevOps-Projects/vprofile-project-aws-LiftAndShift/src/test/java/com/visualpathit/account/controllerTest/SampleTest.java
+/home/mbadwa/DevOps-Projects/vprofile-project-aws-LiftAndShift/src/test/java/com/visualpathit/account/modelTest/UserTest.java
+/home/mbadwa/DevOps-Projects/vprofile-project-aws-LiftAndShift/src/test/java/com/visualpathit/account/modelTest/RoleTest.java
+/home/mbadwa/DevOps-Projects/vprofile-project-aws-LiftAndShift/src/test/java/com/visualpathit/account/controllerTest/UserControllerTest.java
+/home/mbadwa/DevOps-Projects/vprofile-project-aws-LiftAndShift/src/test/java/com/visualpathit/account/setup/StandaloneMvcTestViewResolver.java
