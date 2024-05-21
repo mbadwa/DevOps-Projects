@@ -45,7 +45,7 @@ Managing all this on prem will need several teams; Virtualization team, Data Cen
 ## AWS Services on this project
 
 - EC2 Instances for VMs
-  - Tomcat, RabbitMQ, MEMCACHE, MySQL
+  - Tomcat, RabbitMQ, Memcache, MySQL
 - Elastic Load Balancer, Nginx LB Replacement
 - Autoscaling i.e. Automation for VM Scaling
 - S3/EFS Storage for shared storage
