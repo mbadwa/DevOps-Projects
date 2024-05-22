@@ -29,7 +29,7 @@ There are a number of services/components that powers the vprofile Java web app.
   - Local environment setup
     - Hypervisor - Oracle VM VirtualBox
     - Automation - Vagrant
-    - CLI - bash, for a quick brush up check [here](https://github.com/bobbyiliev/introduction-to-bash-scripting?tab=readme-ov-file)
+    - CLI - bash, for a quick brush up, check [here](https://github.com/bobbyiliev/introduction-to-bash-scripting?tab=readme-ov-file)
     - IDE - Visual Studio Code or your preference
  
 - **The Architecture of Project Services**
