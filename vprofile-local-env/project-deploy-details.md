@@ -29,7 +29,7 @@ There are a number of services/components that powers the vprofile Java web app.
   - Local environment setup
     - Hypervisor - Oracle VM VirtualBox
     - Automation - Vagrant
-    - CLI - bash in Linux
+    - CLI - bash, for a quick brush up check [here](https://github.com/bobbyiliev/introduction-to-bash-scripting?tab=readme-ov-file)
     - IDE - Visual Studio Code or your preference
  
 - **The Architecture of Project Services**
@@ -57,7 +57,7 @@ There are a number of services/components that powers the vprofile Java web app.
 
 1. Set up tools mentioned above
 2. Clone source code [here](https://github.com/hkhcoder/vprofile-project.git)
-3. *cd* into the vagrant directory
+3. *cd* into the vagrant directory [here](/vprofile-local-env/vagrant/Manual_provisioning_WinMacIntel/) for Linux/Win/MacIntel and [here](/vprofile-local-env/vagrant/Manual_provisioning_MacOSM1/) for MacOSM1 
 4. Bring up the VMs
 5. Validate all VMs
 6. Set up All the services
@@ -103,10 +103,10 @@ Once logged in, you can click on a user and check if memcache cached the user an
 
 ## 2. Automatic Provisioning
 
-Open either /DevOps-Projects/vprofile-project-local /vagrant/Manual_provisioning_WinMacIntel or the MacOSM1 folder depending on your OS.
+Open either [here](/vprofile-local-env/vagrant/Automated_provisioning_WinMacIntel/) for Linux/Windows/MacIntel or [here](/vprofile-local-env/vagrant/Automated_provisioning_MacOSM1/) for MacOSM1 folder depending on your OS.
 
 1. The Vagrantfile in it, is slightly different, it points to scripts for each service, e.g. "mysql.sh", memcache.sh", etc.
-2. *cd* into /DevOps-Projects/vprofile-project-local /vagrant/Manual_provisioning_WinMacIntel
+2. *cd* into /DevOps-Projects/vprofile-project-local /vagrant/Automated_provisioning_WinMacIntel
 3. Then just run *vagrant up* command.
 4. After all all the servers are up. SSH into the "web01" and get the IP of the server and then verify in the browser.
 5. Verify in the browser by getting the IP address of "web01" server. 
@@ -124,4 +124,7 @@ Once logged in, you can click on a user and check if memcache cached the user an
 - [Vagrant on Windows, MacOS, or Ubuntu](https://www.itu.dk/people/ropf/blog/vagrant_install.html) by Helge Pfeiffer
 - [Architecture Diagramming](https://www.drawio.com/) courtesy of draw.io application
 - [How to Install and Secure MariaDB in RHEL 9](https://jumpcloud.com/blog/how-to-install-mariadb-rhel-9) by David Worthington
+- [Bash Scripting Intro](https://github.com/bobbyiliev/introduction-to-bash-scripting?tab=readme-ov-file) by 
+bobbyiliev
+
   
