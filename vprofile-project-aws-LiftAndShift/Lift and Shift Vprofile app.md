@@ -162,9 +162,9 @@ A key pair is used for ssh authentication when you want to access your resources
 To retrieve any instance user data in order to verify the scripts, you can paste this URL on your ssh terminal of any connected instance:
 *curl* http://169.254.169.254/latest/user-data
 
-### Backend services mapping using Route 53 (Private DNS Setup)
+### Backend services mapping using Route 53 (Private/Public DNS Setup)
 
-To join your DNS hosting service with AWS and create an SSL certificate using ACM, go [here](/vprofile-project-aws-LiftAndShift/Creating%20an%20SSL%20Certificate%20in%20AWS.md).
+To join your DNS hosting service with AWS and create an SSL certificate using Amazon Certificate Manager (ACM), go [here](/vprofile-project-aws-LiftAndShift/Creating%20an%20SSL%20Certificate%20in%20AWS.md).
 
 1. Go to *Route 53* > *Create hosted zone*
 2. *Type*, select *Private hosted zone*
@@ -191,20 +191,19 @@ To join your DNS hosting service with AWS and create an SSL certificate using AC
 
 **Note**: Tomcat server will be able to resolve to the backend through the, **"application.properties"** file in the userdata folder. Because of that, there is no need to add it to the private DNS.
 
-### Build Artifacts (Re do section)
+### Build Artifacts
 
 1. Go to *src > main > resources > application.properties* file.
-2. Update the *jdbc.url="with your DNS private naming convention here"**, in my case it'll be changed from this, *"jdbc.url=jdbc:mysql://db01:3306/accounts?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=c9  cat /var/lib/tomcat9/webapps/ROOT/
-   20  ls /var/lib/tomcat9/webapps/ROOT/terEncoding=UTF-8&zeroDateTimeBehavior=convertToNull"** to **"db01.vprofile.com"*
-3. For Memcache, it will be; *"memcached.active.host=mc01.vprofile.com"*
-4. 
-5. For RabbitMQ, it will be; *"rabbitmq.address=rmq01.vprofile.com"*
+2. Update this file; "*jdbc.url=* **8jdbc:mysql://db01:3306/** *accounts?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull*" to "*jdbc.url=* **jdbc:mysql://db01.vprofile.com:3306/** *accounts?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull*"
+   - **Note**: Just make sure your URL doesn't have any gaps. 
+3. For Memcache, it will be; *"memcached.active.host=mc01.**vprofile.com**"* 
+5. For RabbitMQ, it will be; *"rabbitmq.address=rmq01.**vprofile.com**"*
 6. Now to build the artifact, locate the folder you cloned from GitHub *cd* into it. You should see a pom.xml file.
-7. Before you proceed you should have a Maven version 3 application installed and Java should be version 11
+7. Before you proceed you should have Apache Maven version 3 application installed and Java should be version 11
 8. When ready execute;  *mvn install*, to build the artifact.
-9. If successful, you'll see newly created folder called *"target"*.
+9.  If successful, you'll see newly created folder with a file called *"target/vprofile-v2.war"*.
 
-### Deploy Artifacts (Re do section)
+### Deploy Artifacts
 
 1. Go to *IAM >* scroll down and hit *Create access key > Command Line Interface (CLI)*
 2. Check the box at the bottom to accept the risk and hit *Next > Create access key*
