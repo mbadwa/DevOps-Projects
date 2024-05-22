@@ -90,7 +90,7 @@ Setup should be done in this order.
 4. Tomcat (Application SVC)
 5. Nginx (Web SVC)
 
-For step by step commands reference for each vagrant box refer [here](./vagrant/Manual_provisioning_WinMacIntel/VprofileProjectSetupWindowsAndMacIntel.pdf)
+For step by step commands reference for each vagrant box refer [here](./vagrant/Manual_provisioning_WinMacIntel/VprofileProjectSetupWindowsAndMacIntel.pdf). To brush up on SQL, go [here](https://sqlcrashcourse.com/). Though not necessary for this project.
 
 Note: Additionally, regarding "db01" vagrant box setup, when configuring Mariadb database refer to [How to Install and Secure MariaDB in RHEL 9
 ](https://jumpcloud.com/blog/how-to-install-mariadb-rhel-9). Just in case the PDF above is not as clear enough to you.
@@ -126,5 +126,6 @@ Once logged in, you can click on a user and check if memcache cached the user an
 - [How to Install and Secure MariaDB in RHEL 9](https://jumpcloud.com/blog/how-to-install-mariadb-rhel-9) by David Worthington
 - [Bash Scripting Intro](https://github.com/bobbyiliev/introduction-to-bash-scripting?tab=readme-ov-file) by 
 bobbyiliev
+- [SQL Crash Course](https://sqlcrashcourse.com/) by Alan Hylands
 
   
