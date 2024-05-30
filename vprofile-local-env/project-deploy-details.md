@@ -71,7 +71,7 @@ There are a number of services/components that powers the vprofile Java web app.
 
 ### Vagrant Application Stack Provisioning
 
-Before you start, make sure that you have installed VirtualBox and Vagrant on your local environment by following the instructions [here](https://www.itu.dk/people/ropf/blog/vagrant_install.html). If you are new to Vagrant then use this [Vagrant crash course](https://gist.github.com/yeukhon/b35d94f4aa859a5477e4). There are installation and setup instructions included.
+Before you start, make sure that you have installed VirtualBox and Vagrant on your local environment by following the Windows instructions [here](https://github.com/neikei/install-vagrant-on-windows?tab=readme-ov-file) and [here](https://developer.hashicorp.com/vagrant/install) for other operating systems. If you are new to Vagrant then use this [Vagrant crash course](https://gist.github.com/yeukhon/b35d94f4aa859a5477e4).
 
 ### Services
 
@@ -144,7 +144,8 @@ Once logged in, you can click on a user and check if memcache cached the user an
 - [Vprofile Source Code](https://github.com/hkhcoder/vprofile-project) by Imran Teli (hkhcoder)
 - [Vagrant crash course](https://gist.github.com/yeukhon/b35d94f4aa859a5477e4) by Yeuk Hon Wong
 - [DevOps Notes](https://visualpath.in/devopstutorials/devops) by Imran Teli
-- [Vagrant on Windows, MacOS, or Ubuntu](https://www.itu.dk/people/ropf/blog/vagrant_install.html) by Helge Pfeiffer
+- [Install-vagrant-on-windows](https://www.itu.dk/people/ropf/blog/vagrant_install.html) by Neikei
+- [Install Vagrant](https://developer.hashicorp.com/vagrant/install) by Harshcorp
 - [Architecture Diagramming](https://www.drawio.com/) courtesy of draw.io application
 - [How to Install and Secure MariaDB in RHEL 9](https://jumpcloud.com/blog/how-to-install-mariadb-rhel-9) by David Worthington
 - [Bash Scripting Intro](https://github.com/bobbyiliev/introduction-to-bash-scripting?tab=readme-ov-file) by 
