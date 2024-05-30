@@ -31,20 +31,32 @@ There are a number of services/components that powers the vprofile Java web app.
     - Automation - Vagrant
     - CLI - bash, for a quick brush up, check [here](https://github.com/bobbyiliev/introduction-to-bash-scripting?tab=readme-ov-file)
     - IDE - Visual Studio Code or your preference
- 
+
+- **Hardware Requirements**
+  
+  These are RAM requirements for each virtual machine to run smoothly:
+
+  - Min:
+    600 MB 
+  - Recommended: 
+    1 GB
+   
 - **The Architecture of Project Services**
+
   - NGINX
   - TOMCAT
   - RABBITMQ
   - MEMCACHED
   - MYSQL
+
 - **The Architecture of the Automated Setup**
+
   - Vagrant
   - VirtualBox
   - Bash
   - Scripts
 
-**Note**: On Windows install [Cygwin](https://geekflare.com/cygwin-installation-guide/) or [Git Bash](https://gitforwindows.org/) for Command Line Interface (CLI)
+  **Note**: On Windows install [Cygwin](https://geekflare.com/cygwin-installation-guide/) or [Git Bash](https://gitforwindows.org/) for Command Line Interface (CLI)
 
 ### User Experience Flow
 
