@@ -97,7 +97,15 @@ Note: Additionally, regarding "db01" vagrant box setup, when configuring Mariadb
 
 Verify in the browser by getting the IP address of "web01" server. To log into the app, use:
 
-username - "*admin_vp*" and pass - "*admin_vp*" without the quotes, check other services like RabbitMQ, Memcached, etc. 
+username; 
+
+    admin_vp
+
+password;
+
+    admin_vp
+
+Check other services like RabbitMQ, Memcached, etc. 
 
 Once logged in, you can click on a user and check if memcache cached the user and also check RabbitMQ if it queued any requests. If you managed to see the web app, it means Nginx was deployed successfully, if you logged in with the credentials above, it means your request was authenticated successfully against MyQSL, congratulations! You just deployed the app on prem.
 
@@ -105,14 +113,29 @@ Once logged in, you can click on a user and check if memcache cached the user an
 
 Open either [here](/vprofile-local-env/vagrant/Automated_provisioning_WinMacIntel/) for Linux/Windows/MacIntel or [here](/vprofile-local-env/vagrant/Automated_provisioning_MacOSM1/) for MacOSM1 folder depending on your OS.
 
-1. The Vagrantfile in it, is slightly different, it points to scripts for each service, e.g. "mysql.sh", memcache.sh", etc.
-2. *cd* into /DevOps-Projects/vprofile-project-local /vagrant/Automated_provisioning_WinMacIntel
-3. Then just run *vagrant up* command.
-4. After all all the servers are up. SSH into the "web01" and get the IP of the server and then verify in the browser.
-5. Verify in the browser by getting the IP address of "web01" server. 
-   To log into the app, use:
+a. The Vagrantfile in it, is slightly different, it points to scripts for each service, e.g. "mysql.sh", memcache.sh", etc.
 
-username - "*admin_vp*" and pass - "*admin_vp*" without the quotes, check other services like RabbitMQ, Memcached, etc. 
+b. Change directory into;
+
+    /DevOps-Projects/vprofile-project-local /vagrant/Automated_provisioning_WinMacIntel
+c. Then just run;
+
+     vagrant up
+
+d. After all all the servers are up. SSH into the "web01" and get the IP of the server and then verify in the browser.
+
+e. Verify in the browser by getting the IP address of "web01" server. 
+   To log into the app, use:
+   
+   username;
+  
+    admin_vp
+
+  password;
+    
+    admin_vp
+
+  Check other services like RabbitMQ, Memcached, etc. 
 
 Once logged in, you can click on a user and check if memcache cached the user and also check RabbitMQ if it queued any requests. If you managed to see the web app, it means Nginx was deployed successfully, if you logged in with the credentials above, it means your request was authenticated successfully against MyQSL, congratulations! You just deployed the app on prem.
 
