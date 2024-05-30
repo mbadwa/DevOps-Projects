@@ -44,6 +44,8 @@ There are a number of services/components that powers the vprofile Java web app.
   - Bash
   - Scripts
 
+**Note**: On Windows install [Cygwin](https://geekflare.com/cygwin-installation-guide/) or [Git Bash](https://gitforwindows.org/) for Command Line Interface (CLI)
+
 ### User Experience Flow
 
 - User opens a browser and enter the IP of a load balancer that routes the request to Tomcat server.
