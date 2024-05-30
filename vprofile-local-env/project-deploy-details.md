@@ -117,7 +117,7 @@ a. The Vagrantfile in it, is slightly different, it points to scripts for each s
 
 b. Change directory into;
 
-    /DevOps-Projects/vprofile-project-local /vagrant/Automated_provisioning_WinMacIntel
+    /DevOps-Projects/vprofile-project-local/vagrant/Automated_provisioning_WinMacIntel
 c. Then just run;
 
      vagrant up
