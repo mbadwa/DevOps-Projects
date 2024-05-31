@@ -68,122 +68,122 @@ There are a number of services/components that powers the vprofile Java web app.
 
 ### 2.1 Manual Provisioning
 
-**List of Services to be provisioned**
+- **List of Services to be provisioned**
 
-1. Nginx => Web Server
-2. Tomcat => Application Server
-3. RabbitMQ => Broker/Queuing Agent
-4. Memcache => DB Caching
-5. ElasticSearch => Indexing/Search Service* will not be deployed, just for reference.
-6. MySQL => SQL Database
-   
-**Flow of Execution**
+  1. Nginx => Web Server
+  2. Tomcat => Application Server
+  3. RabbitMQ => Broker/Queuing Agent
+  4. Memcache => DB Caching
+  5. ElasticSearch => Indexing/Search Service* will not be deployed, just for reference.
+  6. MySQL => SQL Database
+     
+- **Flow of Execution**
 
-1. Set up tools mentioned above
-2. Clone source code [here](https://github.com/hkhcoder/vprofile-project.git)
-3. *cd* into the vagrant directory [here](/vprofile-local-env/vagrant/Manual_provisioning_WinMacIntel/) for Linux/Win/MacIntel and [here](/vprofile-local-env/vagrant/Manual_provisioning_MacOSM1/) for MacOSM1 
-4. Bring up the VMs
-5. Validate all VMs
-6. Set up All the services
-     - MySQL
-     - Memcached
-     - Rabbit MQ
-     - Tomcat
-     - Nginx
-     - App Build and Deploy in Tomcat Server
-7. Verify from browser
+  1. Set up tools mentioned above
+  2. Clone source code [here](https://github.com/hkhcoder/vprofile-project.git)
+  3. *cd* into the vagrant directory [here](/vprofile-local-env/vagrant/Manual_provisioning_WinMacIntel/) for Linux/Win/MacIntel and [here](/vprofile-local-env/vagrant/Manual_provisioning_MacOSM1/) for MacOSM1 
+  4. Bring up the VMs
+  5. Validate all VMs
+  6. Set up All the services
+       - MySQL
+       - Memcached
+       - Rabbit MQ
+       - Tomcat
+       - Nginx
+       - App Build and Deploy in Tomcat Server
+  7. Verify from browser
 
-**Order of Service Execution**
+- **Order of Service Execution**
 
-Setup should be done in this order.
+  Setup should be done in this order.
 
-1. MySQL (Database SVC)
-2. Memcache (DB Caching SVC)
-3. RabbitMQ (Broker/Queue SVC)
-4. Tomcat (Application SVC)
-5. Nginx (Web SVC) 
+  1. MySQL (Database SVC)
+  2. Memcache (DB Caching SVC)
+  3. RabbitMQ (Broker/Queue SVC)
+  4. Tomcat (Application SVC)
+  5. Nginx (Web SVC) 
 
-**Provisioning**
+- **Provisioning**
 
-1. All Servers Setup
+  1. All Servers Setup
 
-    For step by step commands reference for each vagrant box refer [here](./vagrant/Manual_provisioning_WinMacIntel/VprofileProjectSetupWindowsAndMacIntel.pdf). To brush up on SQL, go [here](https://sqlcrashcourse.com/). Though not necessary for this project.
+      For step by step commands reference for each vagrant box refer [here](./vagrant/Manual_provisioning_WinMacIntel/VprofileProjectSetupWindowsAndMacIntel.pdf). To brush up on SQL, go [here](https://sqlcrashcourse.com/). Though not necessary for this project.
 
-    Note: Additionally, regarding "db01" vagrant box setup, when configuring Mariadb database refer to [How to Install and Secure MariaDB in RHEL 9
-    ](https://jumpcloud.com/blog/how-to-install-mariadb-rhel-9). Just in case the PDF above is not as clear enough to you.
+      Note: Additionally, regarding "db01" vagrant box setup, when configuring Mariadb database refer to [How to Install and Secure MariaDB in RHEL 9
+      ](https://jumpcloud.com/blog/how-to-install-mariadb-rhel-9). Just in case the PDF above is not as clear enough to you.
 
-2. Verification and Testing of the Setup
+  2. Verification and Testing of the Setup
 
-     - Verify in the browser by getting the IP address of "web01" server. 
-  
-       - To log into the app, use these credentials:
+       - Verify in the browser by getting the IP address of "web01" server. 
+    
+         - To log into the app, use these credentials:
 
-          - username; 
+            - username; 
 
-                admin_vp
+                  admin_vp
 
-          - password;
+            - password;
 
-                admin_vp
+                  admin_vp
 
-     - Check other services like RabbitMQ, Memcached, etc. 
+       - Check other services like RabbitMQ, Memcached, etc. 
 
-        - Once logged in, you can click on a user and check if memcache cached the user and also check RabbitMQ if it queued any requests. If you managed to see the web app, it means Nginx was deployed successfully, if you logged in with the credentials above, it means your request was authenticated successfully against MyQSL, congratulations! You just deployed the app on prem.
+          - Once logged in, you can click on a user and check if memcache cached the user and also check RabbitMQ if it queued any requests. If you managed to see the web app, it means Nginx was deployed successfully, if you logged in with the credentials above, it means your request was authenticated successfully against MyQSL, congratulations! You just deployed the app on prem.
 
 ### 2.2 Automated Provisioning
 
-**List of Services to be provisioned**
+- **List of Services to be provisioned**
 
-1. Nginx => Web Server
-2. Tomcat => Application Server
-3. RabbitMQ => Broker/Queuing Agent
-4. Memcache => DB Caching
-5. ElasticSearch => Indexing/Search Service* will not be deployed, just for reference.
-6. MySQL => SQL Database
+  1. Nginx => Web Server
+  2. Tomcat => Application Server
+  3. RabbitMQ => Broker/Queuing Agent
+  4. Memcache => DB Caching
+  5. ElasticSearch => Indexing/Search Service* will not be deployed, just for reference.
+  6. MySQL => SQL Database
    
-**Flow of Execution**
+- **Flow of Execution**
 
-1. Set up tools mentioned above
-2. Clone source code [here](https://github.com/hkhcoder/vprofile-project.git).
-     - **Note:** Skip this step if you already cloned the code from the Manual Provisioning section
-3. Locate the vagrant directory [here](/vprofile-local-env/vagrant/Manual_provisioning_WinMacIntel/) for Linux/Win/MacIntel and [here](/vprofile-local-env/vagrant/Manual_provisioning_MacOSM1/) for MacOSM1 
-4. Bring up the VMs
-5. Validate all VMs
-6. Verify from browser
+  1. Set up tools mentioned above
+  2. Clone source code [here](https://github.com/hkhcoder/vprofile-project.git).
+       - **Note:** Skip this step if you already cloned the code from the Manual Provisioning section
+  3. Locate the vagrant directory [here](/vprofile-local-env/vagrant/Manual_provisioning_WinMacIntel/) for Linux/Win/MacIntel and [here](/vprofile-local-env/vagrant/Manual_provisioning_MacOSM1/) for MacOSM1 
+  4. Bring up the VMs
+  5. Validate all VMs
+  6. Verify from browser
 
-**Provisioning**
+- **Provisioning**
 
-1. Open either [here](/vprofile-local-env/vagrant/Automated_provisioning_WinMacIntel/) for Linux/Windows/MacIntel or [here](/vprofile-local-env/vagrant/Automated_provisioning_MacOSM1/) for MacOSM1 folder depending on your OS.
+  1. Open either [here](/vprofile-local-env/vagrant/Automated_provisioning_WinMacIntel/) for Linux/Windows/MacIntel or [here](/vprofile-local-env/vagrant/Automated_provisioning_MacOSM1/) for MacOSM1 folder depending on your OS.
 
-   - The Vagrantfile in it, is slightly different, it points to scripts for each service, e.g. "mysql.sh", memcache.sh", etc.
+     - The Vagrantfile in it, is slightly different, it points to scripts for each service, e.g. "mysql.sh", memcache.sh", etc.
 
-     - Change directory into;
+       - Change directory into;
 
-            /DevOps-Projects/vprofile-project-local/vagrant/Automated_provisioning_WinMacIntel/
+              /DevOps-Projects/vprofile-project-local/vagrant/Automated_provisioning_WinMacIntel/
 
-     - Run the command to auto provision;
+       - Run the command to auto provision;
 
-            vagrant up
+              vagrant up
 
-2. Verification and Testing of the Setup
-   
-     - After all all the servers are up. SSH into the "web01" and get the IP of the server and then verify in the browser.
+  2. Verification and Testing of the Setup
+     
+       - After all all the servers are up. SSH into the "web01" and get the IP of the server and then verify in the browser.
 
-     - Verify in the browser by getting the IP address of "web01" server. 
+       - Verify in the browser by getting the IP address of "web01" server. 
 
-          - To log into the app, use:
-   
-              username;
-  
-                 admin_vp
-
-              password;
+            - To log into the app, use:
+     
+                username;
     
-                 admin_vp
+                   admin_vp
 
-     - Check other services like RabbitMQ, Memcached, etc. 
+                password;
+      
+                   admin_vp
 
-        - Once logged in, you can click on a user and check if memcache cached the user and also check RabbitMQ if it queued any requests. If you managed to see the web app, it means Nginx was deployed successfully, if you logged in with the credentials above, it means your request was authenticated successfully against MyQSL, congratulations! You just deployed the app on prem.
+       - Check other services like RabbitMQ, Memcached, etc. 
+
+          - Once logged in, you can click on a user and check if memcache cached the user and also check RabbitMQ if it queued any requests. If you managed to see the web app, it means Nginx was deployed successfully, if you logged in with the credentials above, it means your request was authenticated successfully against MyQSL, congratulations! You just deployed the app on prem.
 
 ## Sources & References
 - [DevOps Beginners to Advanced with Projects](https://www.udemy.com/course/decodingdevops/?couponCode=LEADERSALE24A) by Imran Teli
