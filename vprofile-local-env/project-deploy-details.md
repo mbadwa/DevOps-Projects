@@ -68,7 +68,16 @@ There are a number of services/components that powers the vprofile Java web app.
 
 ### 2.1 Manual Provisioning
 
-**Flow of Execution for Manual Provisioning**
+**List of Services to be provisioned**
+
+1. Nginx => Web Server
+2. Tomcat => Application Server
+3. RabbitMQ => Broker/Queuing Agent
+4. Memcache => DB Caching
+5. ElasticSearch => Indexing/Search Service* will not be deployed, just for reference.
+6. MySQL => SQL Database
+   
+**Flow of Execution**
 
 1. Set up tools mentioned above
 2. Clone source code [here](https://github.com/hkhcoder/vprofile-project.git)
@@ -83,15 +92,6 @@ There are a number of services/components that powers the vprofile Java web app.
      - Nginx
      - App Build and Deploy in Tomcat Server
 7. Verify from browser
-
-**List of Services to be provisioned**
-
-1. Nginx => Web Server
-2. Tomcat => Application Server
-3. RabbitMQ => Broker/Queuing Agent
-4. Memcache => DB Caching
-5. ElasticSearch => Indexing/Search Service* will not be deployed, just for reference.
-6. MySQL => SQL Database
 
 **Order of Service Execution**
 
@@ -132,16 +132,6 @@ Setup should be done in this order.
 
 ### 2.2 Automated Provisioning
 
-**Flow of Execution for Automated Provisioning**
-
-1. Set up tools mentioned above
-2. Clone source code [here](https://github.com/hkhcoder/vprofile-project.git).
-     - **Note:** Skip this step if you already cloned the code from the Manual Provisioning section
-3. Locate the vagrant directory [here](/vprofile-local-env/vagrant/Manual_provisioning_WinMacIntel/) for Linux/Win/MacIntel and [here](/vprofile-local-env/vagrant/Manual_provisioning_MacOSM1/) for MacOSM1 
-4. Bring up the VMs
-5. Validate all VMs
-6. Verify from browser
-
 **List of Services to be provisioned**
 
 1. Nginx => Web Server
@@ -150,6 +140,16 @@ Setup should be done in this order.
 4. Memcache => DB Caching
 5. ElasticSearch => Indexing/Search Service* will not be deployed, just for reference.
 6. MySQL => SQL Database
+   
+**Flow of Execution**
+
+1. Set up tools mentioned above
+2. Clone source code [here](https://github.com/hkhcoder/vprofile-project.git).
+     - **Note:** Skip this step if you already cloned the code from the Manual Provisioning section
+3. Locate the vagrant directory [here](/vprofile-local-env/vagrant/Manual_provisioning_WinMacIntel/) for Linux/Win/MacIntel and [here](/vprofile-local-env/vagrant/Manual_provisioning_MacOSM1/) for MacOSM1 
+4. Bring up the VMs
+5. Validate all VMs
+6. Verify from browser
 
 **Provisioning**
 
