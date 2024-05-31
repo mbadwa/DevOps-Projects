@@ -6,6 +6,7 @@
 	],
 	"settings": {
 		"cSpell.ignoreWords": [
+			"CATALINE",
 			"Harshcorp",
 			"Hylands",
 			"IAAC",
@@ -17,7 +18,20 @@
 			"Worthington",
 			"Yeuk",
 			"bobbyiliev",
-			"hkhcoder"
+			"devel",
+			"epel",
+			"firewalld",
+			"hkhcoder",
+			"hostmanager",
+			"hostnames",
+			"makecache",
+			"nologin",
+			"padmin",
+			"rabbitmqctl",
+			"setenforce",
+			"sysconfig",
+			"vproapp",
+			"xzvf"
 		]
 	}
 }
