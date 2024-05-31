@@ -45,7 +45,7 @@ There are a number of services/components that powers the vprofile Java web app.
 
     - 2 GB of drive space 
 
-  Recommended hardware configuration for a small team:
+  Recommended hardware configuration:
 
     - 1 GB+ of RAM
 
