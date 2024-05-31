@@ -112,7 +112,7 @@ There are a number of services/components that powers the vprofile Java web app.
 
   1. All Servers Setup
 
-      For step by step commands reference for each vagrant box refer [here](./vagrant/Manual_provisioning_WinMacIntel/VprofileProjectSetupWindowsAndMacIntel.pdf). To brush up on SQL, go [here](https://sqlcrashcourse.com/). Though not necessary for this project.
+      For step by step commands reference for each vagrant box refer [here](./vagrant/Manual_provisioning_WinMacIntel/VprofileProjectSetupWindowsAndMacIntel.pdf) or [here](../vprofile-local-env/vagrant/Manual_provisioning_WinMacIntel/VprofileProjectSetupWindowsAndMacIntel.md). To brush up on SQL, go [here](https://sqlcrashcourse.com/). Though not necessary for this project.
 
       Note: Additionally, regarding "db01" vagrant box setup, when configuring Mariadb database refer to [How to Install and Secure MariaDB in RHEL 9
       ](https://jumpcloud.com/blog/how-to-install-mariadb-rhel-9). Just in case the PDF above is not as clear enough to you.
