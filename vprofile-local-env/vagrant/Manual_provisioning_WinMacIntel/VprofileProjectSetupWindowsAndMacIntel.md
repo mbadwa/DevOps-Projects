@@ -25,9 +25,9 @@
 
     NOTE: Bringing up all the VMs may take a long time based on various factors.
 
-If vm setup stops in the middle run “vagrant up” command again.
+    If vm setup stops in the middle, run “vagrant up” command again.
 
-INFO: All the vm’s hostname and /etc/hosts file entries will be automatically updated.
+    INFO: All the vm’s hostname and /etc/hosts file entries will be automatically updated.
 
 **PROVISIONING**
 
@@ -42,15 +42,15 @@ INFO: All the vm’s hostname and /etc/hosts file entries will be automatically 
    
 **Setup should be done in below mentioned order**
 
-MySQL (Database SVC)
+1. MySQL (Database SVC)
 
-Memcache (DB Caching SVC)
+2.  Memcache (DB Caching SVC)
 
-RabbitMQ (Broker/Queue SVC)
+3. RabbitMQ (Broker/Queue SVC)
 
-Tomcat (Application SVC)
+4. Tomcat (Application SVC)
 
-Nginx (Web SVC)
+5. Nginx (Web SVC)
 
 **Server Services Setup**
 
@@ -158,7 +158,7 @@ Nginx (Web SVC)
         # firewall-cmd --runtime-to-permanent
         # sudo memcached -p 11211 -U 11111 -u memcached -d
 
-    3.RABBITMQ SETUP
+3. RABBITMQ SETUP
 
     Login to the RabbitMQ vm
 
@@ -197,9 +197,11 @@ Nginx (Web SVC)
         # sudo sh -c 'echo "[{rabbit, [{loopback_users, []}]}]." > /etc/rabbitmq/rabbitmq.config'
         # sudo rabbitmqctl add_user test test
         # sudo    Create link to activate website
-    # ln -s /etc/nginx/sites-available/vproapp /etc/nginx/sites-enabled/vproapp
+        # ln -s /etc/nginx/sites-available/vproapp /etc/nginx/sites-enabled/vproapp
+
     Restart Nginx
-    # systemctl restart nginx rabbitmqctl set_user_tags test administrator
+
+        # systemctl restart nginx rabbitmqctl set_user_tags test administrator
 
     FEDORA Changes
 
@@ -214,10 +216,15 @@ Nginx (Web SVC)
         # systemctl restart rabbitmq-server
 
     Create link to activate website
-    # ln -s /etc/nginx/sites-available/vproapp /etc/nginx/sites-enabled/vproapp
+
+        # ln -s /etc/nginx/sites-available/vproapp /etc/nginx/sites-enabled/vproapp
+
     Restart Nginx
-    # systemctl restart nginx
-    4.TOMCAT SETUP
+
+        # systemctl restart nginx
+
+
+4. TOMCAT SETUP
 
     Login to the tomcat vm
 
@@ -334,7 +341,7 @@ Nginx (Web SVC)
         # systemctl restart tomcat
 
     
-    5.NGINX SETUP
+5. NGINX SETUP
 
     Login to the Nginx vm
 
