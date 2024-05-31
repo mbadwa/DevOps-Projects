@@ -39,12 +39,17 @@ There are a number of services/components that powers the vprofile Java web app.
 
 - **Hardware Requirements**
   
-  These are RAM requirements for each virtual machine to run smoothly:
+  Minimum hardware requirements:
 
-  - Min:
-    600 MB 
-  - Recommended: 
-    1 GB
+    - 600 MB of RAM
+
+    - 2 GB of drive space 
+
+  Recommended hardware configuration for a small team:
+
+    - 1 GB+ of RAM
+
+    - 5 GB+ of drive space
    
 ### The Architecture of Project Services
 
