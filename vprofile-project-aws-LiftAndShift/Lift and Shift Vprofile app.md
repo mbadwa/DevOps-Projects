@@ -29,7 +29,7 @@ Managing all this on prem will need several teams; Virtualization team, Data Cen
    - Complex management
    - Scale UP/Down complexity
    - UpFront CapEx & Regular OPEx
-   - Most of the processes will manual
+   - Most of the processes will be manual
    - Difficult to automate and maintain
    - Time consuming operations
    
@@ -75,15 +75,15 @@ Managing all this on prem will need several teams; Virtualization team, Data Cen
 
 - Log into [AWS Account](https://signin.aws.amazon.com/)
 - Create Key Pairs
-- Create Security Groups for Load Balancer, Tomcat and for Backend Services (Memcache, , Attach to an existing load balancerRabbitMQ, MySQL)
+- Create Security Groups for Load Balancer, Tomcat and for Backend Services (Memcache, RabbitMQ, MySQL). Attach to an existing load balancer or new one.
 - Launch Instances with user data (Bash Scripts) for provisioning
 - Update Instances to name mapping in **Route 53**
 - Build Application from source code on the local machine
 - Upload the artifact to S3 bucket
 - Download the artifact to the Tomcat EC2 Instance
-- Set up ELB with HTTPS (Cert from Amazon Certificate Manager) * optional if you don't have a domain to use
+- Set up ELB with HTTPS (Cert from Amazon Certificate Manager) *optional* if you don't have a domain to use
   **Note:** If you plan to use a new domain, you should know that DNS replication takes more than 48 hrs.
-- Map ELB Endpoint to website name in GoDaddy DNS* optional if you don't have a domain to use
+- Map ELB Endpoint to website name in GoDaddy DNS, *optional* if you don't have a domain to use
 - Verify
 - Build Autoscaling Group for Tomcat Instances
 
@@ -93,9 +93,9 @@ A key pair is used for ssh authentication when you want to access your resources
 
 1. Go to **EC2 > Network & Security > Key Pairs** and hit **Create key pair**
 2. Enter name **"vprofile-prod-key"** feel free to choose any name, but in keeping the standard that's why the key is given that name.
-3. Under Private key file format select .pem for Linux or .ppk for Windows
+3. Under Private key file format select **.pem** for Linux or **.ppk** for Windows
 4. Hit **Create key pair**
-5. Change the key access permissions as per instructions indicated
+5. Change the key access permissions as per instructions indicated within the console.
 
 ### Security Groups Examples in this Project
 
@@ -106,13 +106,13 @@ A key pair is used for ssh authentication when you want to access your resources
    - Port: 8080 
    - Protocol: HTTP for Tomcat app and allow **vprofile-ELB-SG** so all traffic coming in is allowed to the web application.
    - Port: 22 
-   - Protocol: SSH - To allow traffic to Tomcat server for troubleshooting using a specific IP.
+   - Protocol: SSH to allow traffic to Tomcat server for troubleshooting using a specific IP.
 
 3. Vprofile Backend Services Security Group - **vprofile-backend-SG**
    - Port: 3306 add source as **vprofile-app-SG** to allow Tomcat traffic into MySQL DB
    - Port: 5672 add source as **vprofile-app-SG** to allow Tomcat traffic into RabbitMQ
    - Port: 11211 add source as **vprofile-app-SG** to allow Tomcat traffic into Memcache
-   - Port: 22 to all backend services for troubleshooting suing a specific IP
+   - Port: 22 to all backend services for troubleshooting using a specific IP.
    - All traffic on all ports with a source of **vprofile-backend-SG** to allow intercommunication among all services within the backend.
 
 ### EC2 VM instances setup
@@ -121,15 +121,15 @@ A key pair is used for ssh authentication when you want to access your resources
 2. **Create MySQL instance**
    - Tags: 
      - Key = "Name", Value = "vprofile-db01"
-     - Key = "Project", Value = "vprofile"**
+     - Key = "Project", Value = "vprofile"
    - Amazon Machine Image, search for **AlmaLinux**, select "AlmaLinux 8 x86_64" image
    -  Instance Type = t2.micro 
-   -  Key pair = "vprofile-prod-key". As per above. 
+   -  Key pair = "vprofile-prod-key" as per above. 
    -  Network settings
       -  Select existing security group 
          -  "vprofile-backend-SG" 
-   -  Configure Storage (6 GiB, gp2/3)**. 
-   -  Go to *Advanced details* and paste the content of the script that you copy from the cloned repo inside **userdata** folder, named "mysql.sh" and paste it under "User data - *optional*" field.
+   -  Configure Storage (6 GiB, gp2/3). 
+   -  Go to *Advanced details* and paste the content of the script that you copy from the cloned repo inside **userdata** folder named, **"mysql.sh"** and paste it under "User data - *optional*" field.
    - Hit the *Launch instance* to create the instance.
 3. **Create Memcache Instance**
    - Tags: 
@@ -144,18 +144,18 @@ A key pair is used for ssh authentication when you want to access your resources
 5. **Create Tomcat Instance**
    - Tags: 
      - Key = "Name", Value = "vprofile-app01"
-     - Key = "Project", Value = "vprofile"**
+     - Key = "Project", Value = "vprofile"
      - Amazon Machine Image
        - select "Ubuntu Server 22.04 LTS" image
      - Instance Type = t2.micro
-     - Key pair = "vprofile-prod-key". As per above. 
+     - Key pair = "vprofile-prod-key" as per above. 
      - Network settings 
        - Select existing security group
          - "vprofile-app-SG" 
      - Configure Storage
        - Value = 6 GiB
        - Value = gp2/3 
-     - Go to *Advanced details* and paste the content of the script that you copy from the cloned repo inside *userdata* folder, named **"tomcat_ubuntu.sh"** and paste it under "User data - *optional*" field.
+     - Go to *Advanced details* and paste the content of the script that you copy from the cloned repo inside **userdata** folder, named **"tomcat_ubuntu.sh"** and paste it under "User data - *optional*" field.
     
 **Note**: Tomcat server is running on ubuntu, its security group is **"vprofile-app-SG"** and its service name is called **tomcat9**
 
@@ -171,7 +171,7 @@ To join your DNS hosting service with AWS and create an SSL certificate using Am
 3. VPCs to associate with the hosted zone 
    - Region = US East(N.Virginia)
    - VPC ID select that appears. 
-   **Note**: you need to select the region where you created your VMs. In my case , it's the above.
+   **Note**: you need to select the region where you created your VMs. In my case, it's the above.
 4. Create hosted zone
    - Select Hosted zones
      - Value ="vprofile.com" 
@@ -179,15 +179,15 @@ To join your DNS hosting service with AWS and create an SSL certificate using Am
      - Record name = "db01"
      - Value = its private IP
    - Select Hosted zones
-      - Value = "vprofile.com"
+     - Value = "vprofile.com"
    - Create record
-      - Record name = "mc01" 
-      - Value = its private IP
+     - Record name = "mc01" 
+     - Value = its private IP
     - Select Hosted zones
-      - Value = "vprofile.com"
-    - Create record
-      - Record name = "rmq01" 
-      - Value = its private IP
+     - Value = "vprofile.com"
+   - Create record
+     - Record name = "rmq01" 
+     - Value = its private IP
 
 **Note**: Tomcat server will be able to resolve to the backend through the, **"application.properties"** file in the userdata folder. Because of that, there is no need to add it to the private DNS.
 
@@ -207,7 +207,8 @@ To join your DNS hosting service with AWS and create an SSL certificate using Am
 
 1. Go to *IAM >* scroll down and hit *Create access key > Command Line Interface (CLI)*
 2. Check the box at the bottom to accept the risk and hit *Next > Create access key*
-  **Note**: never expose your access keys to anyone.
+
+   **Note**: never expose your access keys to anyone.
 3. Download the key and change the permissions of the key, recommended is chmod "400".
 4. Go to your local terminal to log into AWS by running, *"aws configure"*
 5. Enter your ID and Secret to continue
@@ -219,19 +220,35 @@ To join your DNS hosting service with AWS and create an SSL certificate using Am
        - *Use case = EC2* and hit *Next*, search for "AmazonS3FullAccess" policy and hit *Next*
        - *name* = "vprofile-EC2-access-s3" and hit *Create role*.
 9.  Go to *EC2 > Instances > vprofile-app01 > Actions > Security > Modify IAM role >* in the drop down select your role and hit the *Update IAM role*.
-8.  ssh into the Tomcat server
-9.  Run *"apt update && apt install awscli -y"*
-10. Run *"aws s3 ls"* to see if the IAM role that was attached to the EC2 has access permissions to the bucket.
-11. Run this command to copy the artifact; *"aws s3 cp s3://your-bucket-name/vprofile-v2.war /tmp/"*
+10.  ssh into the Tomcat server
+11.  Run 
+
+         apt update && apt install awscli -y
+12. To see if the IAM role that was attached to the EC2 has access permissions to the bucket.
+    
+         aws s3 ls
+13. Run this command to copy the artifact 
+    
+         aws s3 cp s3://your-bucket-name/vprofile-v2.war /tmp/
 
 ## Setup and Verification on the EC2 Instance
 
-1. Stop the Tomcat service; *"systemctl stop tomcat9"*
-2. Remove the default install;  *"rm -rf /var/lib/tomcat9/webapps/ROOT"*
-3. Copy the new artifact from the */tmp/* folder and rename it; *"cp /tmp/vprofile-v2.war /var/lib/tomcat9/webapps/ROOT.war"*
-4. Restart the service; *"systemctl start tomcat9.service"*
-5.  *ls* /var/lib/tomcat9/webapps/
-6.  Verify the copied file; *"cat /var/lib/tomcat9/webapps/ROOT/WEB-INF/classes/application.properties"* 
+1. Stop the Tomcat service 
+   
+         systemctl stop tomcat9
+2. Remove the default install
+   
+         rm -rf /var/lib/tomcat9/webapps/ROOT
+3. Copy the new artifact from the */tmp/* folder and rename it; 
+   
+         cp /tmp/vprofile-v2.war /var/lib/tomcat9/webapps/ROOT.war
+4. Restart the service
+   
+         systemctl start tomcat9.service
+         ls /var/lib/tomcat9/webapps/
+5.  Verify the copied file
+   
+         cat /var/lib/tomcat9/webapps/ROOT/WEB-INF/classes/application.properties 
    
 ### Create Target Group and Load Balancer
 
@@ -281,8 +298,8 @@ Auto scaling group require 3 things, namely; an AMI, a Launch Template and the A
 
 1. Go to *EC2 > Instances > Launch Templates*
 2. Hit the *Create launch template* button
-   - Name = "vprofile-app-LC"
-   - Description = "vprofile-app-LC"
+   - Name = "vprofile-app-LT"
+   - Description = "vprofile-app-LT"
    - Application and OS Images > My AMIs > Owned by me
 3. Instance type = "t2.micro", 
 4. Key pair (login) = "vprofile-prod-key"
@@ -290,7 +307,7 @@ Auto scaling group require 3 things, namely; an AMI, a Launch Template and the A
 6. *Resource tags*
    - Tags: 
        - Key = "Name", Value = "vprofile-app". 
-          Assign the tags to Instances and Volumes.
+          Assign the tags to *Instances* and *Volumes*.
        - Key = "Project", Value = "vprofile". Assign the tags to *Instances*, *Volumes* and *Network interfaces*.
 7. Advanced details
    - IAM instance profile = "vprofile-EC2-access-s3"
@@ -300,7 +317,7 @@ Auto scaling group require 3 things, namely; an AMI, a Launch Template and the A
 
 1. Go to *EC2 > Auto Scaling Groups > Create Auto Scaling group*
    - Name = "vprofile-app-ASG" 
-   - Launch template = "vprofile-app-LC"
+   - Launch template = "vprofile-app-LT"
 2. Hit the *Next*
 3. Network 
    - VPC = select your VPC
@@ -333,7 +350,7 @@ Auto scaling group require 3 things, namely; an AMI, a Launch Template and the A
 11. Hit *Next* to continue
 12. Review and hit the *Create Auto Scaling group*
 
-13. Terminate the "vprofile-app01" instance since you have an autoscaling group running.
+13. Terminate the "vprofile-app01" instance once you have an autoscaling group running.
 14. Go to *Target Groups*, you should see your newly deployed instances.
 
 ### Validate 
