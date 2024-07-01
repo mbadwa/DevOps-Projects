@@ -1,4 +1,4 @@
-# Linking Your Domain to a Hosting Service & SSL Certificate Creation
+# Linking AWS DNS records to a Hosting Service & SSL Certificate Creation
 
 ## Linking AWS Route53 to your Domain Hosting Service
 
