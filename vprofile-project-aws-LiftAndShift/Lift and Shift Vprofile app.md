@@ -164,32 +164,91 @@ To retrieve any instance user data in order to verify the scripts, you can paste
 
 ### Backend services mapping using Route 53 (Private/Public DNS Setup)
 
-To join your DNS hosting service with AWS and create an SSL certificate using Amazon Certificate Manager (ACM), go [here](/vprofile-project-aws-LiftAndShift/Creating%20an%20SSL%20Certificate%20in%20AWS.md).
+#### Creating DNS public zone
+
+To create a public hosted zone using the Route 53 console
+
+1. Sign in to the AWS Management Console and open the Route 53 console at https://console.aws.amazon.com/route53/
+
+
+2. If you're new to Route 53, choose Get started under DNS management.
+
+   If you're already using Route 53, choose Hosted zones in the navigation pane.
+
+3. Choose Create hosted zone.
+
+4. In the Create Hosted Zone pane, enter the name of the domain that you want to route traffic for. You can also optionally enter a comment.
+
+   For information about how to specify characters other than a-z, 0-9, and - (hyphen) and how to specify internationalized domain names, [see DNS domain name format.](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html)
+
+5. For Type, accept the default value of Public Hosted Zone.
+
+6. Choose Create.
+
+7. Create records that specify how you want to route traffic for the domain and subdomains. For more information, see [Working with records.](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/rrsets-working-with.html)
+
+8. To use records in the new hosted zone to route traffic for your domain, see the applicable topic:
+
+   - If you're making Route 53 the DNS service for a domain that is registered with another domain registrar, see [Making Amazon Route 53 the DNS service for an existing domain.](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html)
+
+   - If the domain is registered with Route 53, see [Adding or changing name servers and glue records for a domain.](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-name-servers-glue-records.html)
+
+#### Creating DNS private zone
 
 1. Go to *Route 53* > *Create hosted zone*
-2. *Type*, select *Private hosted zone*
-3. VPCs to associate with the hosted zone 
+2. Domain name
+   - "vprofile.com"
+3. *Type*, select *Private hosted zone*
+4. VPCs to associate with the hosted zone 
    - Region = US East(N.Virginia)
    - VPC ID select that appears. 
    **Note**: you need to select the region where you created your VMs. In my case, it's the above.
-4. Create hosted zone
-   - Select Hosted zones
-     - Value ="vprofile.com" 
-   - Create record
-     - Record name = "db01"
-     - Value = its private IP
-   - Select Hosted zones
-     - Value = "vprofile.com"
-   - Create record
-     - Record name = "mc01" 
-     - Value = its private IP
-    - Select Hosted zones
-     - Value = "vprofile.com"
-   - Create record
-     - Record name = "rmq01" 
-     - Value = its private IP
+5. Hit the *Create hosted zone* button
+6. Hit the *Create record* under the **vprofile** private zone.
+   
+   Record 1
+      - Record name
+        - "db01"
+      - Record type
+        - A
+      - Value
+        - Its private IP Address
+      - TTL (seconds)
+        - 300
+      - Routing policy
+        - Simple routing
+
+   Record 1
+      - Record name
+        - "mc01"
+      - Record type
+        - A
+      - Value
+        - Its private IP Address
+      - TTL (seconds)
+        - 300
+      - Routing policy
+        - Simple routing
+
+   Record 1
+      - Record name
+        - "rmq01"
+      - Record type
+        - A
+      - Value
+        - Its private IP Address
+      - TTL (seconds)
+        - 300
+      - Routing policy
+        - Simple routing
+
+   
 
 **Note**: Tomcat server will be able to resolve to the backend through the, **"application.properties"** file in the userdata folder. Because of that, there is no need to add it to the private DNS.
+
+#### Joining your DNS public zone with your hosting
+
+To join your DNS hosting service with AWS and create an SSL certificate using Amazon Certificate Manager (ACM), go [here](/vprofile-project-aws-LiftAndShift/Creating%20an%20SSL%20Certificate%20in%20AWS.md).
 
 ### Build Artifacts
 

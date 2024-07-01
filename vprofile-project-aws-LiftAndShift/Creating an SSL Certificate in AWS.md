@@ -1,4 +1,4 @@
-# Linking it to a Hosting Service & SSL Certificate Creation
+# Linking Your Domain to a Hosting Service & SSL Certificate Creation
 
 ## Linking AWS Route53 to your Domain Hosting Service
 
@@ -16,8 +16,9 @@
 2. Search for **AWS Certificate Manager** and make sure you are on the same region where you deployed your resource.
 3. Hit the **Request a certificate** button
 4. Click on **Request a public certificate** and hit **Next**
-5. Enter your domain name
-6. Click on the **Create record in Route 53**
-7. Your domain will be selected, click on **Create records** button
+5. Enter your domain name under **Domain names**
+6. Leave the default selection under **Validation method**
+7. Leave the default selection under **Key algorithm**
+8. Click on the **Request**
 
 **Note**: It takes 10 min to populate.
