@@ -89,41 +89,49 @@ Managing all this on prem will need several teams; Virtualization team, Data Cen
 
 ## User Experience Flow
 
-- User(s) will access an HTTPS URL endpoint hosted by GoDaddy that will route the traffic to the load balancer endpoint. The traffic then will be routed to the Tomcat application server. 
+- User(s) will access an HTTPS URL Amazon CloudFront (CDN) endpoint that will be resolved by Route 53, the endpoint will cache so many things to serve global audience, then the request will be redirected to the Beanstalk application load balancer endpoint which in turn forwards the request to an instance in the Beanstalk autoscaling group.
+- Amazon CloudWatch alarms will be monitoring the autoscaling group to trigger scale ins and scale outs requirements.
+- Artifacts will be saved into an S3 bucket to facilitate ease of deployment.
 - The HTTPS certificate will be issued by the Amazon Certificate Manager service.
-- User access the HTTPS endpoint that will point to a load balancer in a Security Group that will only allow HTTPS traffic.
-- Then the application load balancer will route the request to Tomcat instances using autoscaling group on HTTP port: 8080. It will only accept traffic configured in the load balancer's Security Group.
+- The entire frontend will be managed by Amazon Beanstalk.
 - Tomcat will allow all accesses to it through its own Security Group.
-- Information of backend services i.e. **Memcache, RabbitMQ, MySQL** will be populated in **Amazon Route 53 DNS Private Zones** (replacing the **/etc/hosts** file on premises Linux OS). This will be accessed by the Tomcat services through private IPs.
-- These backend services i.e. **Memcache, RabbitMQ, MySQL** will be in their own security group.
+- Information of backend services i.e. **Elasticache, AmazonMQ, RDS** will be populated in **Amazon Route 53 DNS Private Zones** (replacing the **/etc/hosts** file on premises Linux OS). This will be accessed by the Tomcat services through their private IPs.
+- These backend services i.e. **Elasticache, AmazonMQ, RDS** will be in their own security group.
 
 ## Flow of Execution
 
 - Log into [AWS Account](https://signin.aws.amazon.com/)
 - Create Key Pairs
-- Create Security Groups for Load Balancer, Tomcat and for Backend Services (Memcache, RabbitMQ, MySQL). Attach to an existing load balancer or new one.
-- Launch Instances with user data (Bash Scripts) for provisioning
-- Update Instances to name mapping in **Route 53**
-- Build Application from source code on the local machine
-- Upload the artifact to S3 bucket
-- Download the artifact to the Tomcat EC2 Instance
-- Set up ELB with HTTPS (Cert from Amazon Certificate Manager) *optional* if you don't have a domain to use
-  **Note:** If you plan to use a new domain, you should know that DNS replication takes more than 48 hrs.
-- Map ELB Endpoint to website name in GoDaddy DNS, *optional* if you don't have a domain to use
-- Verify
-- Build Autoscaling Group for Tomcat Instances
-
+- Create Security Group for backend services, ie. Elasticache, RDS & ActiveMQ (AmazonMQ)
+- Create
+  - RDS
+  - Amazon Elasticache
+  - Amazon ActiveMQ
+- Create Elastic Beanstalk Environment
+- Update the backend SG to allow traffic the Beanstalk SG that will be automatically provisioned by the Beanstalk environment
+- Update the backend SG to allow internal traffic
+- Launch an Ec2 Instance for DB Initialization
+- Log into the instance and Initialize the RDS DB
+- Change healthcheck on the Beanstalk to "/login" as the path
+- Add 443 https Listener to the ELB that gets created automatically by the Beanstalk
+- Build Artifact from source code with Backend Information i.e. Endpoint of RDS, AmazonMQ and Elasticache
+- Deploy Artifact to Beanstalk
+- Create CDN using Amazon CloudFront with SSL certificate
+- Update entries in GoDaddy and Public DNS Zones in Route 53
+- Test the URL
+  
 ### Create a key pair
 
 A key pair is used for ssh authentication when you want to access your resources remotely.
 
 1. Go to **EC2 > Network & Security > Key Pairs** and hit **Create key pair**
-2. Enter name **"vprofile-prod-key"** feel free to choose any name, but in keeping the standard that's why the key is given that name.
+2. Enter name **"vprofile-bean-key"** feel free to choose any name, but in keeping the standard that's why the key is given that name.
 3. Under Private key file format select **.pem** for Linux or **.ppk** for Windows
 4. Hit **Create key pair**
 5. Change the key access permissions as per instructions indicated within the console.
 
-### Security Groups Examples in this Project
+# To Be Continued after DNS Replication
+### Security Groups Examples in this Project 
 
 1. Load Balancer Security Group - **vprofile-ELB-SG** 
    - Port: 443
@@ -135,10 +143,6 @@ A key pair is used for ssh authentication when you want to access your resources
    - Protocol: SSH to allow traffic to Tomcat server for troubleshooting using a specific IP.
 
 3. Vprofile Backend Services Security Group - **vprofile-backend-SG**
-   - Port: 3306 add source as **vprofile-app-SG** to allow Tomcat traffic into MySQL DB
-   - Port: 5672 add source as **vprofile-app-SG** to allow Tomcat traffic into RabbitMQ
-   - Port: 11211 add source as **vprofile-app-SG** to allow Tomcat traffic into Memcache
-   - Port: 22 to all backend services for troubleshooting using a specific IP.
    - All traffic on all ports with a source of **vprofile-backend-SG** to allow intercommunication among all services within the backend.
 
 ### EC2 VM instances setup
