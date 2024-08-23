@@ -22,7 +22,7 @@ There are a number of services/components that powers the vprofile Java web app.
 
 ### Vprofile Project Application Stack Diagram
 
-![alt](project-diagram.png)
+![alt](/vprofile-local-env/project-diagram.png)
   
 ### Project setup requirements
   
