@@ -17,7 +17,7 @@ It's a multi tier web application stack called Vprofile, it will be hosted and r
 
 ## Vprofile Project Application Stack Diagram
 
-![alt](/vprofile-project-aws-refactoring/project-diagram.png)
+![alt](/vprofile-project-aws-refactoring/project-refa-diagram.png)
 
 
 ## Scenario
