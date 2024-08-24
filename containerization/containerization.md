@@ -221,3 +221,12 @@ This project is learn how to containerize services in an application.
         git commit -m "Updated Docker-files and Docker Compose file"
         git push origin containers
 14. mm
+
+# References
+
+1. [Docker Compose](https://docs.docker.com/compose/gettingstarted/)
+2. [Dockerhub RabbitMQ](https://hub.docker.com/_/rabbitmq)
+3. [Dockerhub Memcached](https://hub.docker.com/_/memcached)
+4. [Dockerhub Nginx](https://hub.docker.com/_/nginx)
+5. [Dockerhub Tomcat](https://hub.docker.com/_/tomcat)
+6. [DevOps Notes by Imran Teli @VisualPath](https://visualpath.in/devopstutorials/devops)

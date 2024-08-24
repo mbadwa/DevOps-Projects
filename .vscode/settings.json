@@ -1,12 +1,36 @@
 {
     "cSpell.ignoreWords": [
+        "Bovvm",
+        "Buildspec",
+        "Burstable",
         "CICD",
+        "Corretto",
+        "Imran",
+        "Platformfor",
         "Rabbitmq",
+        "Teli",
         "VPROFILE",
+        "XJCNCSN",
+        "awseb",
+        "bitbucketvprofile",
         "dockerhub",
         "hostmanager",
+        "jdbc",
+        "kyue",
+        "mbadwa",
         "nginxvproapp",
+        "proappbuild",
+        "publickey",
+        "sgqqusvnr",
+        "vpro",
+        "vproapp",
+        "vproappbuild",
+        "vprobuild",
+        "vprodb",
+        "vprodcicdpipeline",
         "vprofiledb",
-        "vprofileweb"
+        "vprofileproject",
+        "vprofileweb",
+        "vprords"
     ]
 }
