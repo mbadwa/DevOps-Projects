@@ -1,7 +1,12 @@
 {
     "cSpell.ignoreWords": [
+        "CICD",
         "Rabbitmq",
         "VPROFILE",
-        "dockerhub"
+        "dockerhub",
+        "hostmanager",
+        "nginxvproapp",
+        "vprofiledb",
+        "vprofileweb"
     ]
 }

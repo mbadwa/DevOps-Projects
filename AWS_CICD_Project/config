@@ -1,0 +1,6 @@
+# bitbucket.org
+Host bitbucket.org
+  HostName bitbucket.org
+  User git
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/vpro_rsa
