@@ -5,6 +5,8 @@
         "Burstable",
         "CICD",
         "Corretto",
+        "Emart",
+        "Emartapp",
         "Imran",
         "Platformfor",
         "Rabbitmq",
@@ -15,13 +17,16 @@
         "bitbucketvprofile",
         "dockerhub",
         "hostmanager",
+        "javaapi",
         "jdbc",
         "kyue",
         "mbadwa",
         "nginxvproapp",
+        "nodeapi",
         "proappbuild",
         "publickey",
         "sgqqusvnr",
+        "usermod",
         "vpro",
         "vproapp",
         "vproappbuild",
@@ -31,6 +36,7 @@
         "vprofiledb",
         "vprofileproject",
         "vprofileweb",
-        "vprords"
+        "vprords",
+        "webapi"
     ]
 }
