@@ -7,4 +7,4 @@
 3. [Vprofile AWS Refactoring Project](/vprofile-project-aws-refactoring/Refactoring%20with%20AWS.md)
 4. [Vprofile AWS CICD Project](/AWS_CICD_Project/aws-cicd-project.md)
 5. [Vprofile Docker Containerization Project](/containerization/containerization.md)
-6. [Containerizing Microservice Project](/emartapp/emart-containerization.md)
+6. [Containerizing Microservice Project](https://github.com/mbadwa/emart-app/blob/main/emart-containerization.md)
