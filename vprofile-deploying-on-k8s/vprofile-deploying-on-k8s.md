@@ -244,7 +244,7 @@ Create a deployment defs file for RabbitMQ
 
 - Create a defs [file](rmq-dep.yaml) named ```rmq-dep.yaml```
 
-Create a Service deployment defs 
+Create a Service defs file for RabbitMQ 
 
 - Create a defs [file](rmq-CIP.yaml) named ```rmq-CIP.yaml```
 
@@ -252,4 +252,8 @@ Create a Service deployment defs
 
 Create a deployment defs file for Tomcat
 
-- 
+- Create a deployment defs [file](vproapp-dep.yaml) for Tomcat named ```vproapp-dep.yaml```
+
+Create a Service defs file for Tomcat
+
+- Create a defs [file](vproapp-service.yaml) named ```vproapp-service.yaml```
