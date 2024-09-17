@@ -109,4 +109,147 @@ Take note of the ```VolumeId```
   
         $ kubectl label nodes i-065109ea64c9db527 zone=us-east-1b
 
-  - mm
+### 4. Create a Kube Secret for Passwords
+
+The secrets being created are for the passwords of the DBs found in properties file in source [code](https://github.com/devopshydclub/vprofile-project/blob/docker/src/main/resources/application.properties)
+
+- Encode MySQL Password
+
+      $ echo -n "vprodbpass" | base64
+
+  Output
+
+      dnByb2RicGFzcw==
+
+- Encode RabbitMQ Password
+  
+      $ echo -n "guest" | base64
+
+  Output
+
+      Z3Vlc3Q=
+
+- Create ```secret``` definitions [file](/vprofile-deploying-on-k8s/app-secret-yaml) named ```app-secret.yaml``` and commit it to the repo
+
+      $ git add .
+      $ git commit -m "secret"
+      $ git push origin main 
+
+- Test the definition file in kOps server
+
+      $ clone https://github.com/mbadwa/kube-vproapp.git
+      $ cd kube-app
+      $ cat app-secret.yaml
+      $ kubectl create -f app-secret.yaml
+
+  Output 
+
+      secret/app-secret created
+
+  List secrets
+
+      $ kubectl get secret
+
+  Output
+
+      mmmmm
+  
+  Describe secret
+
+      $ kubectl describe secret
+
+  Output
+
+### 5. Create DB Deployment Definitions file
+
+- Create a tag for the DB Volume before proceeding
+  
+  - Go to EC2 > Elastic Block Store > Volumes
+    - Select *your-DB-volume* > Tags > Create Tag
+      - Key: KubernetesCluster
+      - Value: mbadwa.com
+  - Hit Save
+
+  NOTE: *the* ```Value``` *is your cluster name*
+
+
+- Create a ```deployment``` [file](vprodbdep.yaml) named ```vprodbdep.yaml```
+  
+  NOTE: Line 40 creates a volume and then formats it to ext4, when Linux does that, it will create a folder names ```lost+found``` in ```/var/lib/mysql``` folder. When this happens, it inhibits MySQL service to start. Solution; create an init container found at line 45; ```initContainers``` to delete the ```lost+found``` folder first then subsequently create the runtime container.
+
+- Commit and test the file
+  
+  Commit
+
+      $ git add .
+      $ git commit -m "Added vprodb deployment definitions file"
+      $ git push origin main
+
+  Test in kOps
+
+      $ git pull
+      $ kubectl create -f vprodbdep.yaml
+
+  Output
+
+      deployment.apps/vprodb created
+
+  List deployments
+
+      $ kubectl get deploy
+
+  Output
+
+      mmmm
+
+  List pods
+
+      kubectl get pod
+
+  Output
+
+      mmmmm
+
+  Describe pod
+
+      $ kubectl describe pod pod-name
+
+  Output
+
+      nmmmmm
+
+  List Pods again
+
+      $ kubectl get pod
+
+### 6. Create DB Service Definition file 
+
+Create a service with clusterIP because it's a DB not exposed to the outside world
+
+- Create a Service ```clusterIP``` [file](db-CIP.yaml) definitions named ```db-CIP.yaml```
+  
+### 7. Create a Memcached Deployment & Service
+
+Create a deployment definitions file for Memcached 
+
+- Create a defs [file](mc-dep.yaml) named ```mc-dep.yaml``` 
+
+Create a Service defs file for Memcached
+
+- Create a defs [file](mc-CIP.yaml) named ```mc-CIP.yaml```
+
+### 8. Create a RabbitMQ Deployment & Service
+
+Create a deployment defs file for RabbitMQ
+
+- Create a defs [file](rmq-dep.yaml) named ```rmq-dep.yaml```
+
+Create a Service deployment defs 
+
+- Create a defs [file](rmq-CIP.yaml) named ```rmq-CIP.yaml```
+
+### 9. Create a Tomcat Deployment, Service and Init containers
+
+Create a deployment defs file for Tomcat
+
+- 
