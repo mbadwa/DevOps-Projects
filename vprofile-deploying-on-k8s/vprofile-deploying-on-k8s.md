@@ -53,6 +53,8 @@ Kubernetes is the best orchestration tool there is in the market, it's very matu
 
 ### 2. Create an EBS for the DB pod in your kOps 
 
+  Create a Volume
+
     $ aws ec2 create-volume --availability-zone=us-east-1a --size=3 --volume-type=gp2
 
 Output
@@ -71,7 +73,17 @@ Output
     "MultiAttachEnabled": false
     }
 
-Take note of the ```VolumeId```
+  Create a tag
+
+  - Create a tag for the DB Volume before proceeding
+  
+  - Go to EC2 > Elastic Block Store > Volumes
+    - Select *your-DB-volume* > Tags > Create Tag
+      - Key: KubernetesCluster
+      - Value: mbadwa.com
+  - Hit Save
+
+    NOTE: *the* ```Value``` *is your cluster name*. Take note of the ```VolumeId```
 
 ### 3. Create labels
 
@@ -162,17 +174,6 @@ The secrets being created are for the passwords of the DBs found in properties f
 
 ### 5. Create DB Deployment Definitions file
 
-- Create a tag for the DB Volume before proceeding
-  
-  - Go to EC2 > Elastic Block Store > Volumes
-    - Select *your-DB-volume* > Tags > Create Tag
-      - Key: KubernetesCluster
-      - Value: mbadwa.com
-  - Hit Save
-
-  NOTE: *the* ```Value``` *is your cluster name*
-
-
 - Create a ```deployment``` [file](vprodbdep.yaml) named ```vprodbdep.yaml```
   
   NOTE: Line 40 creates a volume and then formats it to ext4, when Linux does that, it will create a folder names ```lost+found``` in ```/var/lib/mysql``` folder. When this happens, it inhibits MySQL service to start. Solution; create an init container found at line 45; ```initContainers``` to delete the ```lost+found``` folder first then subsequently create the runtime container.
@@ -257,3 +258,4 @@ Create a deployment defs file for Tomcat
 Create a Service defs file for Tomcat
 
 - Create a defs [file](vproapp-service.yaml) named ```vproapp-service.yaml```
+
