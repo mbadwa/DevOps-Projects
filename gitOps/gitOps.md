@@ -361,6 +361,101 @@ Here we will trigger the workflow when there are changes with the `main` branch
 
 8. Set up Quality Gates in Sonarcloud
 
+   Go to sonarcloud > Account > your-organization > Quality Gates > Create
+   - Name: `gitOpsQG`
+   - Hit save
+   - Add Condition
+     - Where? Select `On Overall Code`
+     - Quality Gate fails when
+       - `Bugs`
+     - Operator: is greater than, Value: 50%
+   - Select `gitOpsQG` > Projects > your-project-name
+
+9. Run the workflow in `vprofile-action` repo
+   
+   Go to Actions > vprofile actions > Run workflow
+
+
+### Docker Build & Publish
+
+The section of BUILD & PUBLISH in the `main.yml` [file](https://github.com/mbadwa/vprofile-action/blob/main/.github/workflows/main.yml) 
+does the container build and publish to the ECR in AWS
+
+1. Install Helm to run all the Kubernetes files as a bunch
+
+       $ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+       $ chmod 700 get_helm.sh
+       $ ./get_helm.sh
+
+2. Create helm Charts
+       
+       $ cd ~/Documents/gitOps/vprofile-action
+       $ helm create vprofilecharts
+       $ mkdir helm 
+       $ mv vprofilecharts helm/
+       $ ls helm/vprofilecharts/templates/
+
+3. Remove the default templates from the folder
+
+       $ rm -rf helm/vprofilecharts/templates/*
+
+4. Copy the kubernetes file from this [folder](https://github.com/mbadwa/vprofile-action/tree/main/kubernetes/vpro-app)
+
+       $ cp kubernetes/vpro-app/* /helm/vprofilecharts/templates/
+       $ ls helm/vprofilecharts/templates/
+
+5. Point your Load Balancer to point to the kubernetes ingres controller
+   
+   Go to EC2 > Load balancers > copy the DNS name 
+
+6. Go to your domain service registrar (in my case it's Go Daddy)
+
+   Domains > Manage Domain > your-domain > DNS 
+
+   - Add New Record 
+     - Type: CNAME, Name: vprofile, Value: paste-the-LB-DNS-Name-here
+     - Hit Save
+
+7. Test the app
+   
+   In your browser enter: http://vprofile.your-domain.com
+
+   The request goes to the LB, the LB routes the request to the service and the sends the request to the pod. 
+
+8. Clean up
+
+   - First step is to remove the ingress controller that will remove the LB
+  
+     Go to IAM > Users > `gitops > Security credentials > Create access key
+
+     - Use case > Select Command Line Interface (CLI)
+     - Accept the Confirmation > Next
+     - Create access key
+     - copy Access key and Secret access key
+  
+     Go to your terminal and enter the credentials
+
+         $ aws configure
+         $ rm -rf ~/.kube/config
+         $ aws eks update-kubeconfig --region us-east-1 --name name-of-your-cluster
+         $ kubectl get nodes
+         $ cd ~/Documents/gitOps/iac-vprofile
+         $ cat .github/workflows/terraform.yml
+         $ kubectl delete -f paste-the-ingress-controller-url-here
+
+
+   - Second step is to run `terraform destroy` that will remove the VPC and EKS cluster 
+
+         $ hel m list
+         $ helm uninstall vprofile-stack
+         $ cat .github/workflows/Terraform.yml
+      
+      Copy the init command replace the `$BUCKET_TF_STATE` with your bucket name, 
+      download the `terraform.tfstate` file in your S3 bucket first before running the commands
+
+         $ cd ~/Documents/iac-vprofile/terraform
+         $ terraform init -backend-config="bucket=$BUCKET_TF_STATE"
+         $ terraform destroy
 
 # References
 
@@ -368,3 +463,5 @@ Here we will trigger the workflow when there are changes with the `main` branch
 2. [AWS Terraform Modules](https://registry.terraform.io/providers/hashicorp/aws/latest)
 3. [GitHub Actions Market](https://github.com/marketplace?query=checkout)
 4. [GitHub Actions Terraform Setup](https://github.com/marketplace/actions/hashicorp-setup-terraform)
+5. [GitHub Docker ECR Actions](https://github.com/marketplace/actions/docker-ecr)
+6. [Helm Install](https://helm.sh/docs/intro/install/)
