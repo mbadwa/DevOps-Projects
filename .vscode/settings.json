@@ -10,6 +10,7 @@
         "Imran",
         "Kops",
         "Platformfor",
+        "Qube",
         "Rabbitmq",
         "Sonarcloud",
         "Tekton",
@@ -58,6 +59,7 @@
         "vpromc",
         "vpromq",
         "vprords",
-        "webapi"
+        "webapi",
+        "zxvf"
     ]
 }
