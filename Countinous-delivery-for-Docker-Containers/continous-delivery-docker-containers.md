@@ -48,7 +48,6 @@ This project will be continuously building Docker containers and continuously de
 
 ![alt](./img/Docker-CICD%20for%20Docker%20K8s%20on%20Jenkins.drawio.png)
 
-Th
 
 ### Flow Of Execution
 
@@ -78,7 +77,9 @@ Th
 8.  Update Git Repository with
 
     a. Helm Charts
+    
     b. Dockerfile
+    
     c. Jenkinsfile (Pipeline code)
 9.  Create Jenkins job for Pipeline
 10. Run & Test the job
@@ -98,17 +99,21 @@ Th
      1. Log into your SonarQube instance to create a key
      
          - Go to the Administrator icon > My Account > Security
-           - Generate Tokens: `kube-jenkins`
+           - Generate Tokens >  Name: `kube-jenkins`, Type: `User Token`, Expires in: `30 days`
            - Hit Generate
            - Copy it     
      
-     2. Go to Jenkins > Manage Jenkins > System > SonarQube servers > Add SonarQube
+     2. Go to Jenkins > Manage Jenkins > Plugins > Available plugins > search for SonarQube
+        - Check the `Sonar Quality Gates` and `SonarQube Scanner`
+        - Hit Install
+     
+     3. Go to Jenkins > Manage Jenkins > System > SonarQube servers > Add SonarQube
 
          - Name: `sonar-pro`
          - Server URL: http://SonarQube-pvt-IP
          - Hit the Save button
      
-     3. Go back to Go to Jenkins > Manage Jenkins > System > SonarQube servers > Add SonarQube
+     4. Go back to Go to Jenkins > Manage Jenkins > System > SonarQube servers > Add SonarQube
          
          - Server authentication token > Add > Select `Jenkins`
          - Domain: Global credentials (unrestricted)
@@ -121,14 +126,14 @@ Th
          - Select the `kube-sonar-token`
          - Hit Save
    
-     4. Allow traffic from SonarQube to Jenkins instance
+     5. Allow traffic from SonarQube to Jenkins instance
      
         Go to EC2 > Security Groups >  Jenkins-SG > Inbound rules > Edit inbound rules > Add rules
 
         - All traffic, Source: `SonarSG`
         - Save rules
 
-     5. Allow traffic from Jenkins to SonarQube instance
+     6. Allow traffic from Jenkins to SonarQube instance
    
         Go to EC2 > Security Groups >  SonarSG > Inbound rules > Edit inbound rules > Add rules
         - All traffic, Source: `Jenkins-SG`
@@ -160,13 +165,15 @@ Th
       
             $ systemctl status docker
       
-      - Add Jenkins user to the Docker group so jenkins user can also run Docker
+      - Update password and add Jenkins user to the Docker group so jenkins user can also run Docker
       
+            $ sudo passwd jenkins
             $ sudo usermod -aG docker jenkins
             $ id jenkins
             $ su - jenkins
             $ docker images
-            $ reboot
+            $ exit
+            $ sudo reboot
    
       NOTE: The reason Docker Engine is installed in Jenkins server is due to the fact that we will run build commands within the server
 
@@ -177,6 +184,27 @@ Th
          - Search for `Pipeline Utility Steps`, `Docker` and `Docker Pipeline`
          - Hit Install
    
+   5. Install Maven in Jenkins Server
+      
+      1. Download the [Maven binaries](https://maven.apache.org/download.cgi), right-click on the `Binary tar.gz archive` and click on `Copy link address`
+   
+               $ mvn -version
+               $ wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz
+               $ tar -xvf apache-maven-3.9.9-bin.tar.gz
+               $ sudo mv apache-maven-3.9.9 /opt/
+      
+      2. Setting Maven Home and Path
+      
+      
+               $ MVN_HOME='/opt/apache-maven-3.9.9'
+               $ PATH="$MVN_HOME/bin:$PATH"
+               $ export PATH
+               $ source .profile
+      
+      3. Verify version
+      
+               $ mvn -version
+            
 ### 3. Create Kubernetes Cluster with Kops
 
 To set up Kops, you'll require to have a Domain that you can set up in AWS. 
@@ -240,8 +268,8 @@ You can turn it back on when done with rest of the setup.
       
       7.  Remove unnecessary folders and files
       
-             $ rm -rf Docker-db Docker-web compose ansible helm
-             $ ls 
+              $ rm -rf Docker-db Docker-web compose ansible helm
+              $ ls 
       
       8.  Move the Dockerfile from `Docker-app` folder to the current folder
       
@@ -254,7 +282,7 @@ You can turn it back on when done with rest of the setup.
 
           Output
 
-          Dockerfile README.md kubernetes pom.xml src
+              Dockerfile  README.md  kubernetes  pom.xml  src
       
       10. Create a helm directory and a helm chart
       
@@ -333,24 +361,73 @@ You can turn it back on when done with rest of the setup.
       - Type: SSH, Custom: Jenkins-SG, Description - optional: Allow SSH from Jenkins
       - Hit Save rules
 
-   4. Add Kops to Jenkins as a slave
+   4. Add Kops to Jenkins as a node
    
-      1. SSH into Jenkins server
+      1. SSH into Kops server
 
-            $ ssh -i "kops-key.pem" ubuntu@ec2-pub-IP
-            $ sudo mkdir /opt/jenkins-slave
-            $ sudo apt install openjdk-8-jdk -y
-            $ sudo chown ubuntu.ubuntu /opt/jenkins-slave -R
-            $ java -version
+             $ ssh -i "kops-key.pem" ubuntu@ec2-pub-IP
+             $ sudo mkdir /opt/jenkins-node
+             $ sudo apt install openjdk-17-jdk -y
+             $ java -version
    
-      2. Go to Dashboard > Manage Jenkins > Nodes > New node 
+      2. Install Maven
+             $ sudo install 
+      3. Create SSH user
+
+         1. Create a user & change the `/opt/jenkins-node` folder to `jenkops`
+         
+                  $ sudo adduser jenkops
+                  $ ls -l /opt/jenkins-node/
+                  $ sudo chown jenkops.jenkops /opt/jenkins-node -R
+
+         2. Switch editors to vim or keep nano (your preference) and grant `jenkops` admin rights
+
+                  $ sudo update-alternatives --config editor
+                  $ sudo su
+                  # visudo 
+        
+         3. Add `jenkops` to admin users
+         
+                  # User privilege specification
+                  jenkops ALL=(ALL:ALL) ALL
+         
+         4. Switch to `jenkops`
+         
+                  $ sudo su jenkops
+                  $ cd /home/jenkops
+         
+         5. Create .ssh folder in `jenkops` user
+         
+                  $ mkdir ~/.ssh; cd ~/.ssh/ && ssh-keygen -t rsa -m PEM -C "Jenkops agent key" -f "jenkopsAgent_rsa"
+         
+         6. Add the public SSH key to the list of authorized keys on the agent machine
+         
+                  $ cat jenkopsAgent_rsa.pub >> ~/.ssh/authorized_keys
+         
+         7. Ensure that the permissions of the ~/.ssh directory is secure, 
+            as most ssh daemons will refuse to use keys that have file permissions that are considered insecure:
+         
+                  $ chmod 700 ~/.ssh
+                  $ chmod 600 ~/.ssh/authorized_keys ~/.ssh/jenkopsAgent_rsa
+         
+         8. Copy the private SSH key (~/.ssh/jenkopsAgent_rsa) from the agent machine to your OS clipboard (eg: xclip, pbcopy, or ctrl-c).
+        
+                  $ cat ~/.ssh/jenkopsAgent_rsa
+
+            The output should be similar to this:
+               
+                  -----BEGIN RSA PRIVATE KEY-----
+                  ...
+                  -----END RSA PRIVATE KEY-----
+
+      4. Go to Dashboard > Manage Jenkins > Nodes > New node 
       
             - Node name: KOps
             - Type: Permanent Agent
             - Hit Create
-            - Description: KOps slave node
+            - Description: KOps Jenkins node
             - Number of executors: 1
-            - Remote root directory: `/opt/jenkins-slave`
+            - Remote root directory: `/opt/jenkins-node`
             - Labels?: KOPS
             - Usage: Only build jobs with label ....
             - Launch method: Launch agents via SSH
@@ -360,7 +437,7 @@ You can turn it back on when done with rest of the setup.
                   - Scope: Global(Jenkins,nodes,items,all child items,etc)
                   - ID: kops-login
                   - Description: kops-login
-                  - Username: ubuntu
+                  - Username: jenkops
                   - Private Key
                     - Enter directly, paste the KOps instance private key (`cat ~/Downloads/kops-key.pem`)
                     - Add
@@ -369,8 +446,6 @@ You can turn it back on when done with rest of the setup.
               - Host Key Verification Strategy: Non verifying Verification Strategy
             - Availability: Keep this agent online as much as possible
             - Hit Save
-
-      3. KOps
    
    5. Create a Jenkinsfile for pipeline deployment
    
@@ -389,10 +464,48 @@ You can turn it back on when done with rest of the setup.
            remove all NEXUS variables and add two more variables, namely; `registry = "your-docker-hub-user/vproapp"`
          - Under the `environment` section, add `registryCredential=your-jenkins-token` located
            under Dashboard > Manage Jenkins >  Credentials > Stores scoped to Jenkins > System > Global credentials (unrestricted), copy the name; `dockerhub`
-         - 
       
-      4. jkk
-   
-   6. hjfdhf
+      4. Add a Sonar Scanner Tool in Jenkins
 
+         Go to Jenkins Dashboard > Manage Jenkins > Tools > SonarQube Scanner installations > SonarQube Scanner
+
+         - Name: `mysonarscanner4`
+         Hit Save
+      
+      5. Test the pipeline
+
+         Go to Jenkins Dashboard > New item > Enter an item name
+
+         - `kube-cicd`
+         - Select `Pipeline`
+         - Hit OK
+         - Scroll to Pipeline > Definition 
+           - Select Pipeline Script from SCM
+           - SCM: Git
+           - Repositories > Repository URL
+             - Paste the URL
+           - Hit Save
+         - Hit the Build to test
+        
+        Result  
+
+            Checking status of SonarQube task 'AZPGMAeP62fy3_XlIszS' on server 'sonar-pro'
+            SonarQube task 'AZPGMAeP62fy3_XlIszS' status is 'IN_PROGRESS'
+            Cancelling nested steps due to timeout
+
+      6. Webhook setup
+
+         - Go to Projects > Select `vprofile-repo` > Project Settings > Webhooks
+           - Hit Create
+             - Name: `jenkins-webhook`
+             - URL: `http://jenkins-server-pvt-IP:8080/sonarqube-webhook`
+      
+      7. Go to Jenkins to run the Build again
+
+
+# References
+
+1. [Jenkins versions error](https://stackoverflow.com/questions/72227442/unsupported-class-file-major-version-61)
+2. [Maven Packages](https://maven.apache.org/download.cgi)
+3. [Maven Installation](https://phoenixnap.com/kb/install-maven-on-ubuntu)
    
