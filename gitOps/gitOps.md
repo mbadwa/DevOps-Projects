@@ -10,7 +10,7 @@ Everything with code, GitOps is a subset of DevOps. A best strategy of modern De
 4. Microservices complexity
 5. No versioning of infra level changes
 
-Git is a version control system, now how about extending it to manage operation changes. That's where GitOps comes in.
+Git is a version control system. Now, how about extending it to manage operation changes? That's where GitOps comes in.
 
 ### Ingredients
 
@@ -18,7 +18,7 @@ Git is a version control system, now how about extending it to manage operation 
   - CICD automation code
   - Infra automation code
 - Git
-  - versioning all the changes
+  - Versioning all the changes
   - Single place automation code tracking
   - Restricting users access to only git
 - Tools 
@@ -27,11 +27,11 @@ Git is a version control system, now how about extending it to manage operation 
 
 In summary, for example you have cloud infra, e.g. VPC, RDS, Cache, EKS to host an app on it. This is the business logic part of it.
 
-The code's version control is managed by **Git**, i.e. the App code, CICD Pipeline code (Jenkins), and cloud automation code (Terraform/Cloud Formation). This in practice should be different repositories  that are separate from each other. All these repos will be Git repositories, these changes are automated to a certain extent and the missing parts are done manually, this end the end brings up the challenges mentioned before. In an nutshell GitOps tries to restrict manual changes through applying policies in place. For example, no console access for the user, just programmatically accessing the cloud.
+The code's version control is managed by **Git**, i.e. the App code, CICD Pipeline code (Jenkins), and cloud automation code (Terraform/Cloud Formation). This in practice should be different repositories  that are separate from each other. All these repos will be Git repositories, these changes are automated to a certain extent and the missing parts are done manually, this in the end brings up the challenges mentioned before. In an nutshell GitOps tries to restrict manual changes through applying policies in place. For example, no console access for the user, just programmatically accessing the cloud.
 
 ### Solution
 
-All users will commit their respective teams code i.e. dev team, devops team, and ops team in Git, then use so called **GitOps Tools** listed below, they'll detect the changes at infra level, pipeline, or code level and then apply these changes accordingly.
+All users will commit their respective team's code i.e. dev team, devops team, and ops team in Git, then use any of the so called **GitOps Tools** listed below, they'll detect the changes at infra level, pipeline, or code level and then apply these changes accordingly.
 
 - Github Actions
 - GitLab
@@ -50,8 +50,8 @@ We will fork two Git repos, set the SSH authentication with the repos. Use Visua
 **Terraform Workflow/Pipeline/CICD**
 
 - First, it will fetch source code that has two branches, namely; `stage` and `main`
-- When changes are made to the `staging` branch, the workflow will detect it, the Terraform code will be tested, basically it run two commands, `terraform validate` and `terraform plan` commands to check and test the code against AWS cloud and return the list of changes that will be applied before the actual application. The workflow will then break complete
-- When the `staging branch` is validated successfully, it'll be merged to the main branch, this brach is always locked to apply any changes. For any changes to be applied, a `pull request` should be made by the engineer who was working on the code changes, the changes are then checked by the owner of the main branch who can approve or disapprove the `pull request` that will merge the staging branch with the main branch
+- When changes are made to the `staging` branch, the workflow will detect it, the Terraform code will be tested, basically it'll run two commands, `terraform validate` and `terraform plan` commands to check and test the code against AWS cloud and return the list of changes that will be applied before the actual application. The workflow will then break and complete
+- When the `staging branch` is validated successfully, it'll be merged to the main branch, this branch is always locked to apply any changes. For any changes to be applied, a `pull request` should be made by the engineer who was working on the code changes, the changes are then checked by the owner of the main branch who can approve or disapprove the `pull request` that will merge the staging branch with the main branch
 - When the main branch detects the changes, the workflow will apply the changes to AWS infrastructure resources, ie. VPC and EKS
 
 **Application Code Workflow/Pipeline/CICD**
